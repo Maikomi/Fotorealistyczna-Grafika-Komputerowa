@@ -1,0 +1,15 @@
+D:\studia\fotorealistyczna\bin\Debug\net9.0\fotorealistyczna.exe
+D:\studia\fotorealistyczna\bin\Debug\net9.0\fotorealistyczna.deps.json
+D:\studia\fotorealistyczna\bin\Debug\net9.0\fotorealistyczna.runtimeconfig.json
+D:\studia\fotorealistyczna\bin\Debug\net9.0\fotorealistyczna.dll
+D:\studia\fotorealistyczna\bin\Debug\net9.0\fotorealistyczna.pdb
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.GeneratedMSBuildEditorConfig.editorconfig
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.AssemblyInfoInputs.cache
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.AssemblyInfo.cs
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.csproj.CoreCompileInputs.cache
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.sourcelink.json
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.dll
+D:\studia\fotorealistyczna\obj\Debug\net9.0\refint\fotorealistyczna.dll
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.pdb
+D:\studia\fotorealistyczna\obj\Debug\net9.0\fotorealistyczna.genruntimeconfig.cache
+D:\studia\fotorealistyczna\obj\Debug\net9.0\ref\fotorealistyczna.dll
