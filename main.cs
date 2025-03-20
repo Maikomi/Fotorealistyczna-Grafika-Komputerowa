@@ -11,7 +11,7 @@ namespace RayTracing
       Console.WriteLine("Hello World!");  
       Vec v1 = new Vec(1.0f,1.0f,1.0f);
       Console.WriteLine(v1.ToString()); 
-      Console.WriteLine("Length: " + v1.vectorLength()); 
+      Console.WriteLine("Length: " + v1.VectorLength()); 
     }
 
     // public void Test()
