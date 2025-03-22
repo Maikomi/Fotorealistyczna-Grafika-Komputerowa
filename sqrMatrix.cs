@@ -4,7 +4,7 @@ namespace SqrMatrix
 {
     public class SqrMatrix
     {
-        private float[,] data;
+        protected float[,] data;
         private int size;
 
         public SqrMatrix(int n)
@@ -13,7 +13,7 @@ namespace SqrMatrix
             data = new float[n, n];
         }
 
-        public void SetValue(int row, int col, float value)
+        public virtual void SetValue(int row, int col, float value)
         {
             if (row >= 0 && row < size && col >= 0 && col < size)
             {
@@ -179,6 +179,76 @@ namespace SqrMatrix
                 for (int j = 0; j < n; j++)
                     result.SetValue(j, i, m.GetValue(i, j));
             return result;
+        }
+
+        public static SqrMatrix Invert(SqrMatrix m)
+        {
+            float determinant = m.Determinant();
+            if(determinant == 0)
+            {
+                 throw new InvalidOperationException("Matrix is not invertible because its determinant is 0.");
+            }
+            SqrMatrix inverted = MultiplyByScalar(Transpose(m.GetAdjointMatrix()), 1/determinant);
+            return inverted;
+        }
+
+        public static SqrMatrix Scale(SqrMatrix m, float scalar)
+        {
+            int n = m.GetSize();
+            SqrMatrix scaledMatrix = new SqrMatrix(n);
+            for (int i = 0; i < n; i++)
+                for (int j = 0; j < n; j++)
+                    scaledMatrix.SetValue(i, j, m.GetValue(i, j) * scalar);
+            return scaledMatrix;
+        }
+
+public static SqrMatrix Rotate(int n, float angleInDegrees)
+        {
+            if (n < 2)
+                throw new ArgumentException("Rotation matrix must be at least 2x2");
+
+            float angleInRadians = (float)(angleInDegrees * Math.PI / 180);
+            SqrMatrix rotationMatrix = new SqrMatrix(n);
+            rotationMatrix.SetValue(0, 0, (float)Math.Cos(angleInRadians));
+            rotationMatrix.SetValue(0, 1, (float)-Math.Sin(angleInRadians));
+            rotationMatrix.SetValue(1, 0, (float)Math.Sin(angleInRadians));
+            rotationMatrix.SetValue(1, 1, (float)Math.Cos(angleInRadians));
+            for (int i = 2; i < n; i++)
+            {
+                rotationMatrix.SetValue(i, i, 1);
+            }
+            return rotationMatrix;
+        }
+
+        public static SqrMatrix Translate(int n, float tx, float ty)
+        {
+            if (n < 3)
+                throw new ArgumentException("Translation matrix must be at least 3x3");
+
+            SqrMatrix translationMatrix = new SqrMatrix(n);
+            for (int i = 0; i < n; i++)
+            {
+                translationMatrix.SetValue(i, i, 1);
+            }
+            translationMatrix.SetValue(0, n - 1, tx);
+            translationMatrix.SetValue(1, n - 1, ty);
+            return translationMatrix;
+        }
+    }
+    
+    public class UnitMatrix : SqrMatrix
+    {
+        public UnitMatrix(int n) : base(n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                data[i, i] = 1;
+            }
+        }
+
+        public override void SetValue(int row, int col, float value)
+        {
+            throw new InvalidOperationException("Cannot modify a unit matrix");
         }
     }
 }
