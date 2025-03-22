@@ -77,6 +77,26 @@ namespace Vector
             float angleInRadians = (float)Math.Acos(dot/(len1 * len2));
             float angleInDegrees = angleInRadians * 180 / (float)Math.PI;
             return angleInDegrees;
-        } 
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(obj, null))
+            {
+                return false;
+            }
+
+            throw new NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
