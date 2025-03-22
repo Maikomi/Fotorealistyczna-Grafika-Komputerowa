@@ -38,6 +38,31 @@ namespace RayTracing
       //ZADANIE 5
       Console.WriteLine("TASK 5");
       Console.WriteLine("Normalized vector is: " + Vec.CrossProduct(v3, v4).Normalize());
+
+      //ZADANIE 6
+      Console.WriteLine("TASK 6: IMPLEMENTED RAY, PLANE AND SPHERE CLASSES");
+
+      //ZADANIE 7 - 9
+      Sphere sphere = new Sphere(new Vec(0, 0, 0), 10);
+      Ray ray1 = new Ray( new Vec(0, 0, -20), new Vec(0, 0, 1));
+      Ray ray2 = new Ray( new Vec(0, 0, -20), new Vec(0, 1, 0));
+      Console.WriteLine("TASK 7-9: SPHERE AND RAYS DEFINED");
+
+      //ZADANIE 10-11
+      Console.WriteLine("TASK 10-11");
+      if (sphere.Intersects(ray1, out float t0, out float t1))
+      {
+        Console.WriteLine("Sphere intersects with ray 1 at points: " + t0 + " and " + t1);
+        Vec inter0 = ray1.PointAt(t0);
+        Vec inter1 = ray1.PointAt(t1);
+        Console.WriteLine("Intersection 1: " + inter0);
+        Console.WriteLine("Intersection 2: " + inter1);
+      }
+      else
+      {
+        Console.WriteLine("Sphere doesn't intersect with ray 1");
+      }
+
   }
 }
 }
