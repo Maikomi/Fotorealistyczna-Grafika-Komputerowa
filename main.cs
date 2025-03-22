@@ -62,7 +62,33 @@ namespace RayTracing
       {
         Console.WriteLine("Sphere doesn't intersect with ray 1");
       }
+      if (sphere.Intersects(ray2, out float t02, out float t12))
+      {
+        Console.WriteLine("Sphere intersects with ray 1 at points: " + t02 + " and " + t12);
+        Vec inter02 = ray2.PointAt(t02);
+        Vec inter12 = ray2.PointAt(t12);
+        Console.WriteLine("Intersection 1: " + inter02);
+        Console.WriteLine("Intersection 2: " + inter12);
+      }
+      else
+      {
+        Console.WriteLine("Sphere doesn't intersect with ray 2");
+      }
 
-  }
+    //ZADANIE 12
+      Console.WriteLine("TASK 12");
+      Ray ray3 = new Ray( new Vec(10, 0, 0), new Vec(0, 0, 1));
+      if (sphere.Intersects(ray3, out float t03, out float t13))
+        {
+          Console.WriteLine("Sphere intersects with ray 3 at point: " + t03);
+          Vec inter03 = ray3.PointAt(t03);
+          Console.WriteLine("Intersection 1: " + inter03);
+        }
+        else
+        {
+          Console.WriteLine("Sphere doesn't intersect with ray 3");
+        }
+
+    }
 }
 }
