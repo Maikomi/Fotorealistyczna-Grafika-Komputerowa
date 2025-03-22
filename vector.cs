@@ -15,6 +15,16 @@ namespace Vector
             this.z = z;
         }
 
+        public static bool operator ==(Vector v1, Vector v2)
+        {
+            return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
+        }
+
+        public static bool operator !=(Vector v1, Vector v2)
+        {
+            return !(v1 == v2);
+        }
+
         public override string ToString()
         {
             return $"Vector({x}, {y}, {z})";
@@ -25,7 +35,7 @@ namespace Vector
             return (float)Math.Sqrt(x * x + y * y + z * z);
         } 
 
-        public Vector normalize()
+        public Vector Normalize()
         {
             float length = this.VectorLength();
             return length == 0 ? new Vector(0, 0, 0) : new Vector(this.x/length, this.y/length, this.z/length); 
