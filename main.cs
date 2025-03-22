@@ -89,6 +89,24 @@ namespace RayTracing
           Console.WriteLine("Sphere doesn't intersect with ray 3");
         }
 
+    //ZADANIE 13
+      Plane plane = new Plane(new Vec(0, 0, 0), new Vec(0, 1, 1));
+      Console.WriteLine("TASK 13: PLANE DEFINED");
+
+    //ZADANIE 14
+    Console.WriteLine("TASK 14");
+    if (plane.Intersects(ray2, out float tp))
+        {
+          Console.WriteLine("Plane intersects with ray 2 at point: " + tp);
+          Vec inter0p = ray2.PointAt(tp);
+          Console.WriteLine("Intersection 1: " + inter0p);
+        }
+        else
+        {
+          Console.WriteLine("Plane doesn't intersect with ray 2");
+        }
+
     }
+    
 }
 }
