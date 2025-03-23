@@ -50,7 +50,7 @@ namespace RayTracing
 
       //ZADANIE 10-11
       Console.WriteLine("TASK 10-11");
-      if (sphere.Intersects(ray1, out float t0, out float t1))
+      if (Intersections.IntersectionSphere(ray1, sphere, out float t0, out float t1))
       {
         Console.WriteLine("Sphere intersects with ray 1 at points: " + t0 + " and " + t1);
         Vec inter0 = ray1.PointAt(t0);
@@ -62,7 +62,7 @@ namespace RayTracing
       {
         Console.WriteLine("Sphere doesn't intersect with ray 1");
       }
-      if (sphere.Intersects(ray2, out float t02, out float t12))
+      if (Intersections.IntersectionSphere(ray2, sphere, out float t02, out float t12))
       {
         Console.WriteLine("Sphere intersects with ray 1 at points: " + t02 + " and " + t12);
         Vec inter02 = ray2.PointAt(t02);
@@ -78,7 +78,7 @@ namespace RayTracing
     //ZADANIE 12
       Console.WriteLine("TASK 12");
       Ray ray3 = new Ray( new Vec(10, 0, 0), new Vec(0, 0, 1));
-      if (sphere.Intersects(ray3, out float t03, out float t13))
+      if (Intersections.IntersectionSphere(ray3, sphere, out float t03, out float t13))
         {
           Console.WriteLine("Sphere intersects with ray 3 at point: " + t03);
           Vec inter03 = ray3.PointAt(t03);
@@ -95,7 +95,7 @@ namespace RayTracing
 
     //ZADANIE 14
     Console.WriteLine("TASK 14");
-    if (plane.Intersects(ray2, out float tp))
+    if (Intersections.IntersectionPlane(ray2, plane, out float tp))
         {
           Console.WriteLine("Plane intersects with ray 2 at point: " + tp);
           Vec inter0p = ray2.PointAt(tp);
