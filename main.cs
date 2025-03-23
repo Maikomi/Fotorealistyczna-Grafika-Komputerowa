@@ -106,7 +106,50 @@ namespace RayTracing
           Console.WriteLine("Plane doesn't intersect with ray 2");
         }
 
-    }
+    //ZADANIE 15
+    Console.WriteLine("TASK 15");
+    Console.WriteLine("CASE 1");
+    Vec point1 = new Vec(-1, 0.5f, 0);
+    Vec point2 = new Vec(1, 0.5f, 0);
+    Vec direction = Vec.Subtract(point2, point1).Normalize();
+    Ray rayT = new Ray(point1, direction);
     
+    if (Intersections.IntersectonTriangle(new Vec(0, 0, 0), new Vec(1, 0, 0), new Vec(0, 1, 0), rayT, out Vec tt))
+    {
+      Console.WriteLine("Triangle intersects with line at point: " + tt);
+    }
+    else
+       {
+         Console.WriteLine("Triangle doesn't intersect with line");
+       }
+
+    Console.WriteLine("CASE 2");
+    Vec point3 = new Vec(2, -1, 0);
+    Vec point4 = new Vec(2, 2, 0);
+    Vec direction2 = Vec.Subtract(point4, point3).Normalize();
+    Ray rayT2 = new Ray(point3, direction2);
+    if (Intersections.IntersectonTriangle(new Vec(0, 0, 0), new Vec(1, 0, 0), new Vec(0, 1, 0), rayT2, out Vec tt2))
+    {
+      Console.WriteLine("Triangle intersects with line at point: " + tt2);
+    }
+    else
+       {
+         Console.WriteLine("Triangle doesn't intersect with line");
+       }
+
+    Console.WriteLine("CASE 3");
+    Vec point5 = new Vec(0, 0, -1);
+    Vec point6 = new Vec(0, 0, 1);
+    Vec direction3 = Vec.Subtract(point6, point3).Normalize();
+    Ray rayT3 = new Ray(point5, direction3);
+    if (Intersections.IntersectonTriangle(new Vec(0, 0, 0), new Vec(1, 0, 0), new Vec(0, 1, 0), rayT3, out Vec tt3))
+    {
+      Console.WriteLine("Triangle intersects with line at point: " + tt3);
+    }
+    else
+       {
+         Console.WriteLine("Triangle doesn't intersect with line");
+       }
+    }
 }
 }
