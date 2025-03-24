@@ -114,7 +114,7 @@ namespace RayTracing
     
     if (Intersections.IntersectonTriangle(new Vec(0, 0, 0), new Vec(1, 0, 0), new Vec(0, 1, 0), rayT, out Vec tt))
     {
-      Console.WriteLine("Triangle intersects with line at point: " + tt);
+      Console.WriteLine("Triangle intersects with line");
     }
     else
        {
@@ -128,7 +128,7 @@ namespace RayTracing
     Ray rayT2 = new Ray(point3, direction2);
     if (Intersections.IntersectonTriangle(new Vec(0, 0, 0), new Vec(1, 0, 0), new Vec(0, 1, 0), rayT2, out Vec tt2))
     {
-      Console.WriteLine("Triangle intersects with line at point: " + tt2);
+      Console.WriteLine("Triangle intersects with line");
     }
     else
        {
@@ -142,7 +142,7 @@ namespace RayTracing
     Ray rayT3 = new Ray(point5, direction3);
     if (Intersections.IntersectonTriangle(new Vec(0, 0, 0), new Vec(1, 0, 0), new Vec(0, 1, 0), rayT3, out Vec tt3))
     {
-      Console.WriteLine("Triangle intersects with line at point: " + tt3);
+      Console.WriteLine("Triangle intersects with line");
     }
     else
        {

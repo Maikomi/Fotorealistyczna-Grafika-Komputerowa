@@ -34,7 +34,7 @@ namespace Vector
             intersection = 0;
             float denominator = Vector.DotProduct(ray.Direction, plane.Normal);
 
-            if (Math.Abs(denominator) < float.Epsilon)
+            if (Math.Abs(denominator) < 1e-20)
             {
                  if (Math.Abs(Vector.DotProduct(Vector.Subtract(ray.Origin, plane.Point), plane.Normal)) < float.Epsilon)
                  {
@@ -57,9 +57,18 @@ namespace Vector
             Vector edgeAC = Vector.Subtract(C, A);
             Vector normal = Vector.CrossProduct(edgeAB, edgeAC);
 
+            Plane trianglePlane = new Plane(A, normal);
+
             float dotRayNorm = Vector.DotProduct(normal, ray.Direction);
-            if (Math.Abs(dotRayNorm) < float.Epsilon)
+
+            if (Math.Abs(dotRayNorm) < 1e-20f)
             {
+                float distanceToPlane = Vector.DotProduct(normal, Vector.Subtract(A, ray.Origin));
+                if (Math.Abs(distanceToPlane) < 1e-20f)
+                {
+                    return IntersectionPlane(ray, trianglePlane, out float intersectionP);
+                }
+
                  return false;
             }
                
