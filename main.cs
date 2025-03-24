@@ -150,12 +150,12 @@ namespace RayTracing
          Console.WriteLine("Triangle doesn't intersect with line");
        }
 
-
     //ZADANIE DODATKOWE
       Console.WriteLine("\nADDITIONAL TASKS");
 
     //ZADANIE 5
       Console.WriteLine("TASK 5: QUATERIONS IMPLEMENTED");
+
     // ZADANIE 6: Obrót wektora [3,1,3] wokół wektora [1,0,1] o 90 stopni  
       Console.WriteLine("TASK 6");  
 
@@ -168,7 +168,7 @@ namespace RayTracing
       Console.WriteLine($"Original vector: {vector}");
       Console.WriteLine($"Rotated vector: {rotatedVector}");
   
-      string path = @"C:\tmp\Tests.txt";
+      string path = @"..\..\..\Tests.txt";
         
       // Create a file to write to.
       using (StreamWriter sw = new StreamWriter(path, false))
