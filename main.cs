@@ -211,22 +211,14 @@ namespace RayTracing
     Console.WriteLine("MATRIX CLASS TESTED, RESULTS IN TXT FILE");
 
     //ZADANIE 3
-    Console.WriteLine("\nTASK 3");
-    // Tworzymy wektor wejściowy
-      Vec v = new Vec(1, 0, 1);
+      Console.WriteLine("\nTASK 3");
+      Vec v = new Vec(1, 0, 0);
 
-      // Macierz obrotu wokół osi Y o 90 stopni
-      float rotateAngle = (float)(Math.PI / 2); // konwersja stopni na radiany
-      sqrtMatrix rotationY = new sqrtMatrix(3);
-      rotationY.SetMatrix(new float[,]
-      {
-          { (float)Math.Cos(rotateAngle), 0, (float)Math.Sin(rotateAngle) },
-          { 0, 1, 0 },
-          { -(float)Math.Sin(rotateAngle), 0, (float)Math.Cos(rotateAngle) }
-      });
+      Vec rotatedVec = Quaternion.Rotate(float.Pi / 2, new Vec(0, 1, 0), new Vec(1, 0, 0));
 
-      // Mnożenie macierzy przez wektor
-      Vec rotatedVec = rotationY.MultiplyVector(v);
+      rotatedVec.x = MathF.Round(rotatedVec.x); 
+      rotatedVec.y = MathF.Round(rotatedVec.y); 
+      rotatedVec.z = MathF.Round(rotatedVec.z); 
 
       Console.WriteLine($"Original Vector: {v}");
       Console.WriteLine($"Rotated Vector: {rotatedVec}");
