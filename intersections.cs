@@ -66,11 +66,19 @@ namespace Vector
                 float distanceToPlane = Vector.DotProduct(normal, Vector.Subtract(A, ray.Origin));
                 if (Math.Abs(distanceToPlane) < 1e-20f)
                 {
-                    return IntersectionPlane(ray, trianglePlane, out float intersectionP);
-                    //dodać czy pkt przecięcia jest w trójkącie
-                }
+                    if (IntersectionPlane(ray, trianglePlane, out float intersectionP))
+                    {
+                        Vector planeIntersection = Vector.Add(ray.Origin, Vector.MultiplyScalar(ray.Direction, intersectionP));
+
+                        if (IsPointInsideTriangle(planeIntersection, A, B, C))
+                        {
+                            intersection = planeIntersection;
+                            return true;
+                        }
+                    }
 
                  return false;
+                }
             }
                
             float t = Vector.DotProduct(normal, Vector.Subtract(A, ray.Origin)) / dotRayNorm;
@@ -92,6 +100,26 @@ namespace Vector
                 return true;
             
             return false;
+    }
+
+        private static bool IsPointInsideTriangle(Vector point, Vector A, Vector B, Vector C)
+    {
+        
+        Vector edgeAB = Vector.Subtract(B, A);
+        Vector edgeAC = Vector.Subtract(C, A);
+        Vector edgeBC = Vector.Subtract(C, B);
+
+        Vector AP = Vector.Subtract(point, A);
+        Vector BP = Vector.Subtract(point, B);
+        Vector CP = Vector.Subtract(point, C);
+
+        Vector normal = Vector.CrossProduct(edgeAB, edgeAC);
+
+        Vector v1 = Vector.CrossProduct(edgeAB, AP);
+        Vector v2 = Vector.CrossProduct(edgeAC, BP);
+        Vector v3 = Vector.CrossProduct(edgeBC, CP);
+
+        return (Vector.DotProduct(v1, normal) >= 0.0f && Vector.DotProduct(v2, normal) >= 0.0f && Vector.DotProduct(v3, normal) >= 0.0f);
     }
  }
 }
