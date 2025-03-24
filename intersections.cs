@@ -67,6 +67,7 @@ namespace Vector
                 if (Math.Abs(distanceToPlane) < 1e-20f)
                 {
                     return IntersectionPlane(ray, trianglePlane, out float intersectionP);
+                    //dodać czy pkt przecięcia jest w trójkącie
                 }
 
                  return false;
