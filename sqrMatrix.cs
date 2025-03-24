@@ -54,7 +54,7 @@ namespace SqrMatrix
             return size;
         }
 
-        public void Print()
+        public void ConsolePrint()
         {
             for (int i = 0; i < size; i++)
             {
@@ -64,6 +64,20 @@ namespace SqrMatrix
                 }
                 Console.WriteLine();
             }
+        }
+
+        public string Print()
+        {
+            string print = "\n";
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    print = print + $"{data[i, j]} ";
+                }
+                print = print + "\n";
+            }
+            return print;
         }
 
         public float Cofactor(int row, int col)
@@ -246,7 +260,20 @@ namespace SqrMatrix
             translationMatrix.SetValue(1, n - 1, ty);
             return translationMatrix;
         }
+    public Vector.Vector MultiplyVector(Vector.Vector v)
+    {
+    if (size != 3)
+        throw new InvalidOperationException("Matrix must be 3x3 to multiply by a 3D vector.");
+
+    float newX = data[0, 0] * v.x + data[0, 1] * v.y + data[0, 2] * v.z;
+    float newY = data[1, 0] * v.x + data[1, 1] * v.y + data[1, 2] * v.z;
+    float newZ = data[2, 0] * v.x + data[2, 1] * v.y + data[2, 2] * v.z;
+
+    return new Vector.Vector(newX, newY, newZ);
     }
+
+    }
+    
     
     public class UnitMatrix : SqrMatrix
     {

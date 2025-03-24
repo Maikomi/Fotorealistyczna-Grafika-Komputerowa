@@ -2,6 +2,9 @@ using Vector;
 using Vec = Vector.Vector;
 using sqrtMatrix = SqrMatrix.SqrMatrix;
 using System.IO;
+using System.Numerics;
+using Plane = Vector.Plane;
+using Quaternion = Vector.Quaternion;
 
 
 namespace RayTracing
@@ -177,31 +180,56 @@ namespace RayTracing
     matrix1.SetMatrix(arrayM1);
     matrix2.SetMatrix(arrayM2);
 
+    //matrix1.ConsolePrint();
+    //string m1 = matrix1.Print();
+    //Console.WriteLine($"{m1}");
+
      string task2 = @"..\..\..\Task2.txt";
+
+    sqrtMatrix adjointMatrix = matrix1.GetAdjointMatrix();
         
       // Create a file to write to.
       using (StreamWriter sw = new StreamWriter(task2, false))
       {
           sw.WriteLine("ADDITIONAL TASK 2");
-          sw.WriteLine($"Matrix 1: {matrix1.Print}");
-          sw.WriteLine($"\nMatrix 2: {matrix2.Print}");
-          sw.WriteLine($"m1 + m2: {sqrtMatrix.Add(matrix1, matrix2)}");
-          sw.WriteLine($"m1 - m2: {sqrtMatrix.Subtract(matrix1, matrix2)}");
+          sw.WriteLine($"Matrix 1: {matrix1.Print()}");
+          sw.WriteLine($"\nMatrix 2: {matrix2.Print()}");
+          sw.WriteLine($"m1 + m2: {sqrtMatrix.Add(matrix1, matrix2).Print()}");
+          sw.WriteLine($"m1 - m2: {sqrtMatrix.Subtract(matrix1, matrix2).Print()}");
           sw.WriteLine($"Cofactor matrix 1: {matrix1.Cofactor(2, 2)}");
-          sw.WriteLine($"Adjoint matrix 1: {matrix1.GetAdjointMatrix}");
-          sw.WriteLine($"Determinant matrix 1: {matrix1.Determinant}");
-          sw.WriteLine($"m2 * 3: {sqrtMatrix.MultiplyByScalar(matrix1, 3)}");
-          sw.WriteLine($"m1 * m2: {sqrtMatrix.Multiply(matrix1, matrix2)}");
-          sw.WriteLine($"m1 transposed: {sqrtMatrix.Transpose(matrix1)}");
-          sw.WriteLine($"m2 inverted: {sqrtMatrix.Invert(matrix2)}");
-          sw.WriteLine($"m1 scaled x2: {sqrtMatrix.Scale(matrix1, 2)}");
-          sw.WriteLine($"m1 rotated: {sqrtMatrix.Rotate(3, 90)}");
-          sw.WriteLine($"m1 translated: {sqrtMatrix.Translate(3, 90, 0)}");
-
+          sw.WriteLine($"Adjoint matrix 1: {adjointMatrix.Print()}");
+          sw.WriteLine($"Determinant matrix 1: {matrix1.Determinant()}");
+          sw.WriteLine($"m2 * 3: {sqrtMatrix.MultiplyByScalar(matrix1, 3).Print()}");
+          sw.WriteLine($"m1 * m2: {sqrtMatrix.Multiply(matrix1, matrix2).Print()}");
+          sw.WriteLine($"m1 transposed: {sqrtMatrix.Transpose(matrix1).Print()}");
+          sw.WriteLine($"m2 inverted: {sqrtMatrix.Invert(matrix2).Print()}");
+          sw.WriteLine($"m1 scaled x2: {sqrtMatrix.Scale(matrix1, 2).Print()}");
+          sw.WriteLine($"m1 rotated: {sqrtMatrix.Rotate(3, 90).Print()}");
+          sw.WriteLine($"m1 translated: {sqrtMatrix.Translate(3, 90, 0).Print()}");
       }	
 
-
     Console.WriteLine("MATRIX CLASS TESTED, RESULTS IN TXT FILE");
+
+    //ZADANIE 3
+    Console.WriteLine("TASK 3");
+    // Tworzymy wektor wejściowy
+      Vec v = new Vec(1, 0, 1);
+
+      // Macierz obrotu wokół osi Y o 90 stopni
+      float rotateAngle = (float)(Math.PI / 2); // konwersja stopni na radiany
+      sqrtMatrix rotationY = new sqrtMatrix(3);
+      rotationY.SetMatrix(new float[,]
+      {
+          { (float)Math.Cos(rotateAngle), 0, (float)Math.Sin(rotateAngle) },
+          { 0, 1, 0 },
+          { -(float)Math.Sin(rotateAngle), 0, (float)Math.Cos(rotateAngle) }
+      });
+
+      // Mnożenie macierzy przez wektor
+      Vec rotatedVec = rotationY.MultiplyVector(v);
+
+      Console.WriteLine($"Original Vector: {v}");
+      Console.WriteLine($"Rotated Vector: {rotatedVec}");
 
     //ZADANIE 5
       Console.WriteLine("TASK 5: QUATERIONS IMPLEMENTED");
