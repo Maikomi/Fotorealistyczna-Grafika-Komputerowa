@@ -1,0 +1,16 @@
+ADDITIONAL TASK 2
+Matrix 1: System.Action
+
+Matrix 2: System.Action
+m1 + m2: SqrMatrix.SqrMatrix
+m1 - m2: SqrMatrix.SqrMatrix
+Cofactor matrix 1: -8
+Adjoint matrix 1: System.Func`1[SqrMatrix.SqrMatrix]
+Determinant matrix 1: System.Func`1[System.Single]
+m2 * 3: SqrMatrix.SqrMatrix
+m1 * m2: SqrMatrix.SqrMatrix
+m1 transposed: SqrMatrix.SqrMatrix
+m2 inverted: SqrMatrix.SqrMatrix
+m1 scaled x2: SqrMatrix.SqrMatrix
+m1 rotated: SqrMatrix.SqrMatrix
+m1 translated: SqrMatrix.SqrMatrix

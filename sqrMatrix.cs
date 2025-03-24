@@ -13,6 +13,18 @@ namespace SqrMatrix
             data = new float[n, n];
         }
 
+        public void SetMatrix(float[,] inputArray)
+        {
+            if (inputArray.GetLength(0) == size && inputArray.GetLength(1) == size)
+            {
+                data = inputArray;
+            }
+            else
+            {
+            throw new ArgumentException("Input data dimensions do not match the matrix size.");
+        }
+        }
+
         public virtual void SetValue(int row, int col, float value)
         {
             if (row >= 0 && row < size && col >= 0 && col < size)
@@ -202,7 +214,7 @@ namespace SqrMatrix
             return scaledMatrix;
         }
 
-public static SqrMatrix Rotate(int n, float angleInDegrees)
+        public static SqrMatrix Rotate(int n, float angleInDegrees)
         {
             if (n < 2)
                 throw new ArgumentException("Rotation matrix must be at least 2x2");

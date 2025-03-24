@@ -1,5 +1,6 @@
 using Vector;
 using Vec = Vector.Vector;
+using sqrtMatrix = SqrMatrix.SqrMatrix;
 using System.IO;
 
 
@@ -151,7 +152,56 @@ namespace RayTracing
        }
 
     //ZADANIE DODATKOWE
-      Console.WriteLine("\nADDITIONAL TASKS");
+      Console.WriteLine("\n----------------");
+      Console.WriteLine("ADDITIONAL TASKS");
+      Console.WriteLine("----------------");
+
+    //ZADANIE 1
+    Console.WriteLine("\nTASK 1: MATRIX CLASS IMPLEMENTED");
+
+    //ZADANIE 2
+    Console.WriteLine("TASK 2");
+    sqrtMatrix matrix1 = new sqrtMatrix(3);
+    sqrtMatrix matrix2 = new sqrtMatrix(3);
+    float [ , ] arrayM1 = {
+            { 1, 2, 0 },
+            { 4, 0, 6 },
+            { 0, 0, 0 }
+    };
+    float [ , ] arrayM2 = {
+            { 1, -4, 2 },
+            { -2, 1, 3 },
+            { 2, 6, 8 }
+    };
+
+    matrix1.SetMatrix(arrayM1);
+    matrix2.SetMatrix(arrayM2);
+
+     string task2 = @"..\..\..\Task2.txt";
+        
+      // Create a file to write to.
+      using (StreamWriter sw = new StreamWriter(task2, false))
+      {
+          sw.WriteLine("ADDITIONAL TASK 2");
+          sw.WriteLine($"Matrix 1: {matrix1.Print}");
+          sw.WriteLine($"\nMatrix 2: {matrix2.Print}");
+          sw.WriteLine($"m1 + m2: {sqrtMatrix.Add(matrix1, matrix2)}");
+          sw.WriteLine($"m1 - m2: {sqrtMatrix.Subtract(matrix1, matrix2)}");
+          sw.WriteLine($"Cofactor matrix 1: {matrix1.Cofactor(2, 2)}");
+          sw.WriteLine($"Adjoint matrix 1: {matrix1.GetAdjointMatrix}");
+          sw.WriteLine($"Determinant matrix 1: {matrix1.Determinant}");
+          sw.WriteLine($"m2 * 3: {sqrtMatrix.MultiplyByScalar(matrix1, 3)}");
+          sw.WriteLine($"m1 * m2: {sqrtMatrix.Multiply(matrix1, matrix2)}");
+          sw.WriteLine($"m1 transposed: {sqrtMatrix.Transpose(matrix1)}");
+          sw.WriteLine($"m2 inverted: {sqrtMatrix.Invert(matrix2)}");
+          sw.WriteLine($"m1 scaled x2: {sqrtMatrix.Scale(matrix1, 2)}");
+          sw.WriteLine($"m1 rotated: {sqrtMatrix.Rotate(3, 90)}");
+          sw.WriteLine($"m1 translated: {sqrtMatrix.Translate(3, 90, 0)}");
+
+      }	
+
+
+    Console.WriteLine("MATRIX CLASS TESTED, RESULTS IN TXT FILE");
 
     //ZADANIE 5
       Console.WriteLine("TASK 5: QUATERIONS IMPLEMENTED");
@@ -165,10 +215,10 @@ namespace RayTracing
 
       Vec rotatedVector = Quaternion.Rotate(angle, axis, vector);
   
-      string path = @"..\..\..\Task6.txt";
+      string task6 = @"..\..\..\Task6.txt";
         
       // Create a file to write to.
-      using (StreamWriter sw = new StreamWriter(path, false))
+      using (StreamWriter sw = new StreamWriter(task6, false))
       {
           sw.WriteLine("ADDITIONAL TASK 6");
           sw.WriteLine($"Original vector: {vector}");
