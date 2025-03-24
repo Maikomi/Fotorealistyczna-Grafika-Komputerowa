@@ -96,5 +96,26 @@ namespace Vector
         {
             return W == other.W && V == other.V;
         }
+
+        public float Magnitude()
+        {
+            return (float)Math.Sqrt(W * W + V.x * V.x + V.y * V.y + V.z * V.z);
+        }
+
+        public Quaternion Inverse()
+        {
+            float magnitudeSquared = W * W + V.x * V.x + V.y * V.y + V.z * V.z;
+            return new Quaternion(W / magnitudeSquared, -V.x / magnitudeSquared, -V.y / magnitudeSquared, -V.z / magnitudeSquared);
+        }
+
+        public Vector ToEulerAngles()
+        {
+            float roll = (float)Math.Atan2(2 * (W * V.x + V.y * V.z), 1 - 2 * (V.x * V.x + V.y * V.y)) * 180 / (float)Math.PI;
+            float pitch = (float)Math.Asin(2 * (W * V.y - V.z * V.x)) * 180 / (float)Math.PI;
+            float yaw = (float)Math.Atan2(2 * (W * V.z + V.x * V.y), 1 - 2 * (V.y * V.y + V.z * V.z)) * 180 / (float)Math.PI;
+
+            return new Vector(roll, pitch, yaw);
+        }
+
     }
 }

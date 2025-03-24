@@ -282,7 +282,31 @@ namespace RayTracing
           sw.WriteLine($"Original vector: {vector}");
           sw.WriteLine($"Rotated vector: {rotatedVector}");
       }	
-      Console.WriteLine("DATA SAVED IN TXT FILE.");  
+      Console.WriteLine("DATA SAVED IN TXT FILE."); 
+
+    //ZADANIE 7
+      Console.WriteLine("\nTASK 7");  
+      float rotationAngle = 30.0f;
+      float radians = (float)(rotationAngle * Math.PI / 180);
+      float halfAngle = radians / 2;
+
+      float w = (float)Math.Cos(halfAngle);
+      float x = (float)Math.Sin(halfAngle);
+      float y = 0;
+      float z = 0;
+
+      Quaternion qRotation = new Quaternion(w, x, y, z);
+      Console.WriteLine("Quaternion for 30-degree rotation around X-axis: " + qRotation);
+
+      Console.WriteLine("\nTASK 7.1");
+      Console.WriteLine("Magnitude of quaternion: " + qRotation.Magnitude());
+
+      Console.WriteLine("\nTASK 7.2");
+      Console.WriteLine("Inverse quaternion: " + qRotation.Inverse());
+
+      Console.WriteLine("\nTASK 7.3");
+      Vec eulerAngles = qRotation.ToEulerAngles();
+      Console.WriteLine($"Euler angles: Roll(X)={eulerAngles.x}, Pitch(Y)={eulerAngles.y}, Yaw(Z)={eulerAngles.z}");
     }
   }
 }
