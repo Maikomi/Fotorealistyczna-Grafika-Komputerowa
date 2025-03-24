@@ -14,14 +14,14 @@ namespace RayTracing
     static void Main(string[] args)
     {
       //ZADANIE 1
-      Console.WriteLine("TASK 1: IMPLEMENTED VECTOR CLASS");
+      Console.WriteLine("\nTASK 1: IMPLEMENTED VECTOR CLASS");
 
       Vec v1 = new Vec(0, 3, 0);
       Vec v2 = new Vec(5, 5, 0);
       Console.WriteLine("v1 = " + v1 + ", v2 = " + v2);
       
       //ZADANIE 2
-      Console.WriteLine("TASK 2");
+      Console.WriteLine("\nTASK 2");
       if ( Vec.Add(v1, v2) == Vec.Add(v2, v1))
       {
         Console.WriteLine("Addition is commutative and the sum is: " + Vec.Add(v1, v2));
@@ -29,30 +29,30 @@ namespace RayTracing
       else Console.WriteLine("Sth went wrong");
 
       //ZADANIE 3
-       Console.WriteLine("TASK 3");
+       Console.WriteLine("\nTASK 3");
        Console.WriteLine("Angle between v1 and v2 is: " + Vec.AngleBetweenVectors(v1, v2) + " degrees");
 
       //ZADANIE 4
-      Console.WriteLine("TASK 4");
+      Console.WriteLine("\nTASK 4");
       Vec v3 = new Vec(4, 5, 1);
       Vec v4 = new Vec(4, 1, 3);
       Console.WriteLine("Perpendicular vector is: " + Vec.CrossProduct(v3, v4));
 
       //ZADANIE 5
-      Console.WriteLine("TASK 5");
+      Console.WriteLine("\nTASK 5");
       Console.WriteLine("Normalized vector is: " + Vec.CrossProduct(v3, v4).Normalize());
 
       //ZADANIE 6
-      Console.WriteLine("TASK 6: IMPLEMENTED RAY, PLANE AND SPHERE CLASSES");
+      Console.WriteLine("\nTASK 6: IMPLEMENTED RAY, PLANE AND SPHERE CLASSES");
 
       //ZADANIE 7 - 9
       Sphere sphere = new Sphere(new Vec(0, 0, 0), 10);
       Ray ray1 = new Ray( new Vec(0, 0, -20), new Vec(0, 0, 1));
       Ray ray2 = new Ray( new Vec(0, 0, -20), new Vec(0, 1, 0));
-      Console.WriteLine("TASK 7-9: SPHERE AND RAYS DEFINED");
+      Console.WriteLine("\nTASK 7-9: SPHERE AND RAYS DEFINED");
 
       //ZADANIE 10-11
-      Console.WriteLine("TASK 10-11");
+      Console.WriteLine("\nTASK 10-11");
       if (Intersections.IntersectionSphere(ray1, sphere, out float t0, out float t1))
       {
         Console.WriteLine("Sphere intersects with ray 1 at points: " + t0 + " and " + t1);
@@ -79,7 +79,7 @@ namespace RayTracing
       }
 
     //ZADANIE 12
-      Console.WriteLine("TASK 12");
+      Console.WriteLine("\nTASK 12");
       Ray ray3 = new Ray( new Vec(10, 0, 0), new Vec(0, 0, 1));
       if (Intersections.IntersectionSphere(ray3, sphere, out float t03, out float t13))
         {
@@ -94,10 +94,10 @@ namespace RayTracing
 
     //ZADANIE 13
       Plane plane = new Plane(new Vec(0, 0, 0), new Vec(0, 1, 1));
-      Console.WriteLine("TASK 13: PLANE DEFINED");
+      Console.WriteLine("\nTASK 13: PLANE DEFINED");
 
     //ZADANIE 14
-    Console.WriteLine("TASK 14");
+    Console.WriteLine("\nTASK 14");
     if (Intersections.IntersectionPlane(ray2, plane, out float tp))
         {
           Console.WriteLine("Plane intersects with ray 2 at point: " + tp);
@@ -110,7 +110,7 @@ namespace RayTracing
         }
 
     //ZADANIE 15
-    Console.WriteLine("TASK 15");
+    Console.WriteLine("\nTASK 15");
     Console.WriteLine("CASE 1");
     Vec point1 = new Vec(-1, 0.5f, 0);
     Vec point2 = new Vec(1, 0.5f, 0);
@@ -163,7 +163,7 @@ namespace RayTracing
     Console.WriteLine("\nTASK 1: MATRIX CLASS IMPLEMENTED");
 
     //ZADANIE 2
-    Console.WriteLine("TASK 2");
+    Console.WriteLine("\nTASK 2");
     sqrtMatrix matrix1 = new sqrtMatrix(3);
     sqrtMatrix matrix2 = new sqrtMatrix(3);
     float [ , ] arrayM1 = {
@@ -211,7 +211,7 @@ namespace RayTracing
     Console.WriteLine("MATRIX CLASS TESTED, RESULTS IN TXT FILE");
 
     //ZADANIE 3
-    Console.WriteLine("TASK 3");
+    Console.WriteLine("\nTASK 3");
     // Tworzymy wektor wejściowy
       Vec v = new Vec(1, 0, 1);
 
@@ -231,11 +231,41 @@ namespace RayTracing
       Console.WriteLine($"Original Vector: {v}");
       Console.WriteLine($"Rotated Vector: {rotatedVec}");
 
+    //ZADANIE 4
+      Console.WriteLine("\nTASK 4");
+
+      sqrtMatrix A = new sqrtMatrix(2);
+      A.SetMatrix(new float[,] { { 1, 2 }, { 3, 4 } });
+
+      sqrtMatrix B = new sqrtMatrix(2);
+      B.SetMatrix(new float[,] { { 0, 1 }, { 1, 0 } });
+
+      // Obliczamy A * B i B * A
+      sqrtMatrix AB = sqrtMatrix.Multiply(A,B);
+      sqrtMatrix BA = sqrtMatrix.Multiply(B,A);
+
+      // Wyświetlamy wyniki
+      Console.WriteLine("A * B:");
+      AB.ConsolePrint();
+
+      Console.WriteLine("\nB * A:");
+      BA.ConsolePrint();
+
+      // Sprawdzamy, czy AB != BA
+      if (!AB.Equals(BA))
+      {
+          Console.WriteLine("Mnożenie macierzy NIE jest przemienne!");
+      }
+      else
+      {
+          Console.WriteLine("Mnożenie macierzy jest przemienne (coś poszło nie tak)!");
+      }
+
     //ZADANIE 5
-      Console.WriteLine("TASK 5: QUATERIONS IMPLEMENTED");
+      Console.WriteLine("\nTASK 5: QUATERIONS IMPLEMENTED");
 
     // ZADANIE 6: Obrót wektora [3,1,3] wokół wektora [1,0,1] o 90 stopni  
-      Console.WriteLine("TASK 6");  
+      Console.WriteLine("\nTASK 6");  
 
       Vec vector = new Vec(3, 1, 3);
       Vec axis = new Vec(1, 0, 1).Normalize();
