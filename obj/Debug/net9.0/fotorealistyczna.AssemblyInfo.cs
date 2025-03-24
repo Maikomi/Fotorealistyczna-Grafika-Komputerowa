@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fotorealistyczna")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83bc608c75c0de695a9608816ea7a65c4f2d2369")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+411b75b9b9c93e9f6c5d6e6d8513c2377d02367f")]
 [assembly: System.Reflection.AssemblyProductAttribute("fotorealistyczna")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fotorealistyczna")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

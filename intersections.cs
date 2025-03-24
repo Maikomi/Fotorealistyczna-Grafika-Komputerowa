@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.Numerics;
 using System.Runtime.Serialization;
 namespace Vector
 {
@@ -51,37 +53,35 @@ namespace Vector
         {
             intersection = null;
 
-            Vector edge1 = Vector.Subtract(B, A);
-            Vector edge2 = Vector.Subtract(C, A);
-            Vector normal = Vector.CrossProduct(edge1, edge2);
+            Vector edgeAB = Vector.Subtract(B, A);
+            Vector edgeAC = Vector.Subtract(C, A);
+            Vector normal = Vector.CrossProduct(edgeAB, edgeAC);
 
-            Plane trianglePlane = new Plane(A, normal);
-
-            if (!IntersectionPlane(ray, trianglePlane, out float intersectionPlane))
-            {             
-                return false;
+            float dotRayNorm = Vector.DotProduct(normal, ray.Direction);
+            if (Math.Abs(dotRayNorm) < float.Epsilon)
+            {
+                 return false;
             }
+               
+            float t = Vector.DotProduct(normal, Vector.Subtract(A, ray.Origin)) / dotRayNorm;
+
+            if (t < 0.0f)
+                return false;
             
-            intersection = ray.PointAt(intersectionPlane);
+            intersection = Vector.Add(ray.Origin, Vector.MultiplyScalar(ray.Direction, t));
 
-            Vector v0 = Vector.Subtract(C, A);
-            Vector v1 = Vector.Subtract(B, A);
-            Vector v2 = Vector.Subtract(B, C);
+            Vector AP = Vector.Subtract(intersection, A);
+            Vector BP = Vector.Subtract(intersection, B);
+            Vector CP = Vector.Subtract(intersection, C);
 
-            float d00 = Vector.DotProduct(v0, v0);
-            float d01 = Vector.DotProduct(v0, v1);
-            float d11 = Vector.DotProduct(v1, v1);
-            float d02 = Vector.DotProduct(v0, v2);
-            float d12 = Vector.DotProduct(v1, v2);
+            Vector v1 = Vector.CrossProduct(edgeAB, AP);
+            Vector v2 = Vector.CrossProduct(edgeAC, BP);
+            Vector v3 = Vector.CrossProduct(Vector.Subtract(B, C), CP);
 
-            float denom = d00 * d11 - d01 * d01;
-
-            float u = (d11 * d02 - d01 * d12) / denom;
-            float v = (d00 * d12 - d01 * d02) / denom;
-            float w = 1.0f - u - v;
+            if (Vector.DotProduct(v1, normal) >= 0.0f && Vector.DotProduct(v2, normal) >= 0.0f && Vector.DotProduct(v3, normal) >= 0.0f)
+                return true;
             
-            return u >= 0 && v >= 0 && w >= 0;
-        }
-
+            return false;
     }
+ }
 }

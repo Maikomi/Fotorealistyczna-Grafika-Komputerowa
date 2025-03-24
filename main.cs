@@ -1,8 +1,6 @@
-using System;
 using Vector;
 using Vec = Vector.Vector;
-using SqrMat = SqrMatrix.SqrMatrix;
-using System.Diagnostics.CodeAnalysis;
+
 
 namespace RayTracing
 {
