@@ -41,14 +41,14 @@ namespace Vector
             return new Quaternion(newW, newV.x, newV.y, newV.z);
         }
 
-        public Quaternion Add(Quaternion other)
+        public static Quaternion Add(Quaternion q1, Quaternion q2)
         {
-            return new Quaternion(W + other.W, V.x + other.V.x, V.y + other.V.y, V.z + other.V.z);
+            return new Quaternion(q1.W + q2.W, q1.V.x + q2.V.x, q1.V.y + q2.V.y, q1.V.z + q2.V.z);
         }
 
-        public Quaternion Subtract(Quaternion other)
+        public static Quaternion Subtract(Quaternion q1, Quaternion q2)
         {
-            return new Quaternion(W - other.W, V.x - other.V.x, V.y - other.V.y, V.z - other.V.z);
+            return new Quaternion(q1.W - q2.W, q1.V.x - q2.V.x, q1.V.y - q2.V.y, q1.V.z - q2.V.z);
         }
 
         public Quaternion MatrixMultiply(Quaternion other)
@@ -115,6 +115,24 @@ namespace Vector
             float yaw = (float)Math.Atan2(2 * (W * V.z + V.x * V.y), 1 - 2 * (V.y * V.y + V.z * V.z)) * 180 / (float)Math.PI;
 
             return new Vector(roll, pitch, yaw);
+        }
+
+        // Iloczyn skalarny dwóch kwaternionów 
+        public static float DotProduct(Quaternion q1, Quaternion q2)
+        {
+            return Vector.DotProduct(q1.V, q2.V) + q1.W * q2.W;
+        }
+
+        // Iloczyn kwaterionowy (iloczyn Hamiltona)
+        public static Quaternion CrossProduct(Quaternion q1, Quaternion q2)
+        {
+            float newW = q1.W * q2.W - Vector.DotProduct(q1.V, q2.V);
+            Vector newV = Vector.Add(
+                Vector.Add(Vector.MultiplyScalar(q2.V, q1.W), Vector.MultiplyScalar(q1.V, q2.W)),
+                Vector.CrossProduct(q1.V, q2.V)
+            );
+
+            return new Quaternion(newW, newV.x, newV.y, newV.z);
         }
 
     }

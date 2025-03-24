@@ -307,6 +307,14 @@ namespace RayTracing
       Console.WriteLine("\nTASK 7.3");
       Vec eulerAngles = qRotation.ToEulerAngles();
       Console.WriteLine($"Euler angles: Roll(X)={eulerAngles.x}, Pitch(Y)={eulerAngles.y}, Yaw(Z)={eulerAngles.z}");
+
+    //ZADANIE 8
+      Console.WriteLine("\nTASK 8");  
+      Quaternion qA = new Quaternion(0.233f, 0.060f, -0.257f, -0.935f);  
+      Quaternion qB = new Quaternion(-0.752f, 0.286f, 0.374f, 0.459f);
+      Console.WriteLine("Dot Product: " + Quaternion.DotProduct(qA, qB));
+      Console.WriteLine("Cross Product: " + Quaternion.CrossProduct(qA, qB).ToString());
+      Console.WriteLine("Difference: " + Quaternion.Subtract(qA, qB).ToString());
     }
   }
 }
