@@ -169,17 +169,15 @@ namespace RayTracing
       Console.WriteLine($"Rotated vector: {rotatedVector}");
   
       string path = @"C:\tmp\Tests.txt";
-      if (!File.Exists(path))
-        {
-            // Create a file to write to.
-            using (StreamWriter sw = File.CreateText(path))
-            {
-                sw.WriteLine("Hello");
-                sw.WriteLine("And");
-                sw.WriteLine("Welcome");
-            }	
-          Console.WriteLine("utworzono txt");  
-        }
+        
+      // Create a file to write to.
+      using (StreamWriter sw = new StreamWriter(path, false))
+      {
+          sw.WriteLine("Hello");
+          sw.WriteLine("And");
+          sw.WriteLine("Welcome");
+      }	
+      Console.WriteLine("utworzono txt");  
     }
   }
 }
