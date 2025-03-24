@@ -164,20 +164,17 @@ namespace RayTracing
       float angle = 90.0f;
 
       Vec rotatedVector = Quaternion.Rotate(angle, axis, vector);
-
-      Console.WriteLine($"Original vector: {vector}");
-      Console.WriteLine($"Rotated vector: {rotatedVector}");
   
-      string path = @"..\..\..\Tests.txt";
+      string path = @"..\..\..\Task6.txt";
         
       // Create a file to write to.
       using (StreamWriter sw = new StreamWriter(path, false))
       {
-          sw.WriteLine("Hello");
-          sw.WriteLine("And");
-          sw.WriteLine("Welcome");
+          sw.WriteLine("ADDITIONAL TASK 6");
+          sw.WriteLine($"Original vector: {vector}");
+          sw.WriteLine($"Rotated vector: {rotatedVector}");
       }	
-      Console.WriteLine("utworzono txt");  
+      Console.WriteLine("DATA SAVED IN TXT FILE.");  
     }
   }
 }
