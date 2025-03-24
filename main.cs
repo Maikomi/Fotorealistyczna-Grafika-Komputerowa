@@ -307,6 +307,15 @@ namespace RayTracing
       Console.WriteLine("Dot Product: " + Quaternion.DotProduct(qA, qB));
       Console.WriteLine("Cross Product: " + Quaternion.CrossProduct(qA, qB).ToString());
       Console.WriteLine("Difference: " + Quaternion.Subtract(qA, qB).ToString());
+
+    //ZADANIE 9
+      Console.WriteLine("\nTASK 9");  
+      string filePath = "../../../cube.obj";
+
+      ObjParser parser = new ObjParser();
+      parser.Load(filePath);
+      parser.PrintData();
+
     }
   }
 }
