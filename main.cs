@@ -30,6 +30,22 @@ namespace RayTracing
       Console.WriteLine("Scaled (light1 * 2): " + scaled);
       Console.WriteLine("Negative Test (light1 * -1): " + negativeTest);
 
+      // ZADANIE 2
+      Console.WriteLine("\n\nSPHERE");
+
+      int width = 500, height = 500;
+      ImageRenderer renderer = new ImageRenderer(width, height);
+      OrthographicCamera camera = new OrthographicCamera(width, height);
+      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f);
+
+      LightIntensity objectColor = new LightIntensity(0, 0, 1); // Czerwony
+      LightIntensity backgroundColor = new LightIntensity(0, 0, 0); // Czarny
+
+      // RENDERUJEMY SCENĘ
+      renderer.RenderSphereScene(camera, sphere, objectColor, backgroundColor);
+
+      // ZAPISUJEMY OBRAZ
+      renderer.SaveToFile("render_output.png");
     }
   }
 }
