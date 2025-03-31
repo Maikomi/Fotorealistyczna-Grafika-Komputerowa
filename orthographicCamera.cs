@@ -2,22 +2,18 @@ using System;
 using System.Drawing;
 using Vector;
 
-public class OrthographicCamera
+public class OrthographicCamera : Camera
 {
-    public int Width { get; }
-    public int Height { get; }
     public float PixelWidth { get; }
     public float PixelHeight { get; }
 
-    public OrthographicCamera(int width, int height)
+    public OrthographicCamera(int width, int height) : base(width, height)
     {
-        Width = width;
-        Height = height;
         PixelWidth = 2.0f / width;  // Skalowanie do [-1,1]
         PixelHeight = 2.0f / height;
     }
 
-    public Ray GenerateRay(int x, int y)
+    public override Ray GenerateRay(int x, int y)
     {
         float centerX = -1.0f + (x + 0.5f) * PixelWidth;
         float centerY = 1.0f - (y + 0.5f) * PixelHeight;

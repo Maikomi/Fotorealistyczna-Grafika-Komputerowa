@@ -28,3 +28,9 @@ D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\obj\Debug\
 D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\obj\Debug\net9.0\fotorealistyczna.pdb
 D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\obj\Debug\net9.0\fotorealistyczna.genruntimeconfig.cache
 D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\obj\Debug\net9.0\ref\fotorealistyczna.dll
+D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\bin\Debug\net9.0\Microsoft.Win32.SystemEvents.dll
+D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\bin\Debug\net9.0\System.Drawing.Common.dll
+D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\bin\Debug\net9.0\System.Private.Windows.Core.dll
+D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\bin\Debug\net9.0\runtimes\win\lib\net9.0\Microsoft.Win32.SystemEvents.dll
+D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\obj\Debug\net9.0\fotorealistyczna.csproj.AssemblyReference.cache
+D:\Studies\SEM1\PhotorealisticCG\Fotorealistyczna-Grafika-Komputerowa\obj\Debug\net9.0\fotoreal.3BFC432D.Up2Date

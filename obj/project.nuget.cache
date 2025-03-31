@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "09kh3rqHULs=",
+  "dgSpecHash": "wb2V5kWE8KY=",
   "success": true,
   "projectFilePath": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\karol\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.3\\microsoft.win32.systemevents.9.0.3.nupkg.sha512",
+    "C:\\Users\\karol\\.nuget\\packages\\system.drawing.common\\9.0.3\\system.drawing.common.9.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
