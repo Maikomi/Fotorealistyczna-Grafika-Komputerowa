@@ -4,10 +4,10 @@ namespace Lighting
 {
     public class LightIntensity
     {
-        private double r, g, b;
+        private float r, g, b;
 
         // Konstruktor główny
-        public LightIntensity(double R, double G, double B)
+        public LightIntensity(float R, float G, float B)
         {
             r = R;
             g = G;
@@ -16,13 +16,13 @@ namespace Lighting
         }
 
         // Inne konstruktory
-        public LightIntensity(double R, double G) : this(R, G, 0.0) { }
-        public LightIntensity(double R) : this(R, 0.0, 0.0) { }
-        public LightIntensity() : this(0.0, 0.0, 0.0) { }
+        public LightIntensity(float R, float G) : this(R, G, 0.0f) { }
+        public LightIntensity(float R) : this(R, 0.0f, 0.0f) { }
+        public LightIntensity() : this(0.0f, 0.0f, 0.0f) { }
 
-        public double GetRed() { return r; }
-        public double GetGreen() { return g; }
-        public double GetBlue() { return b; }
+        public float GetRed() { return r; }
+        public float GetGreen() { return g; }
+        public float GetBlue() { return b; }
 
         // Dodawanie dwóch natężeń światła
         public static LightIntensity operator +(LightIntensity a, LightIntensity b)
@@ -31,18 +31,22 @@ namespace Lighting
         }
 
         // Mnożenie natężenia przez skalar
-        public static LightIntensity operator *(LightIntensity a, double scalar)
+        public static LightIntensity operator *(LightIntensity a, float scalar)
         {
             return new LightIntensity(a.r * scalar, a.g * scalar, a.b * scalar);
         }
 
         // Dzielenie natężenia przez skalar
-        public static LightIntensity operator /(LightIntensity a, double scalar)
+        public static LightIntensity operator /(LightIntensity a, float scalar)
         {
             if (scalar == 0)
                 throw new DivideByZeroException("Nie można dzielić przez zero!");
 
             return new LightIntensity(a.r / scalar, a.g / scalar, a.b / scalar);
+        }
+
+        public static implicit operator Vector.Vector(LightIntensity d) {
+            return new Vector.Vector(d.GetRed(),d.GetGreen(), d.GetBlue());
         }
 
         // aby wartości ujemne zamieniały się w 0

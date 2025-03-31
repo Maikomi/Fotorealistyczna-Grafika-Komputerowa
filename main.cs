@@ -15,8 +15,8 @@ namespace RayTracing
     static void Main(string[] args)
     {
       Console.WriteLine("\n\nPART TWO");
-      LightIntensity light1 = new LightIntensity(0.7, 0.8, 0.5);
-      LightIntensity light2 = new LightIntensity(0.5, 0.3, 0.6);
+      LightIntensity light1 = new LightIntensity(0.7f, 0.8f, 0.5f);
+      LightIntensity light2 = new LightIntensity(0.5f, 0.3f, 0.6f);
       LightIntensity sum = light1 + light2; // nie może przekroczyć 1
       LightIntensity scaled = light1 * 2;  // nie może przekroczyć 1
       LightIntensity negativeTest = light1 * -1; // nie może spaść poniżej 0
@@ -58,24 +58,24 @@ namespace RayTracing
       int sqWidth = width / cols;
       int sqHeight = height / rows;
 
-      double[,] firstRowColors = new double[,]
+      float[,] firstRowColors = new float[,]
     {
-        { 19 / 255.0, 1 / 255.0, 1 / 255.0 },
-        { 3 / 255.0, 18 / 255.0, 0 },
-        { 0, 2 / 255.0, 20 / 255.0 },
-        { 243 / 255.0, 60 / 255.0, 51 / 255.0 },
-        { 107 / 255.0, 242 / 255.0, 0 },
-        { 255 / 255.0, 247 / 255.0, 38 / 255.0 }
+        { 19.0f / 255.0f, 1.0f / 255.0f, 1 / 255.0f },
+        { 3 / 255.0f, 18 / 255.0f, 0 },
+        { 0, 2 / 255.0f, 20 / 255.0f },
+        { 243 / 255.0f, 60 / 255.0f, 51 / 255.0f },
+        { 107 / 255.0f, 242 / 255.0f, 0 },
+        { 255 / 255.0f, 247 / 255.0f, 38 / 255.0f }
     };
 
-    double[,] lastRowColors = new double[,]
+    float[,] lastRowColors = new float[,]
     {
-        { 243 / 255.0, 60 / 255.0, 45 / 255.0 },
-        { 107 / 255.0, 242 / 255.0, 0 },
-        { 0, 75 / 255.0, 254 / 255.0 },
-        { 238 / 255.0, 95 / 255.0, 255 / 255.0 },
-        { 91 / 255.0, 250 / 255.0, 252 / 255.0 },
-        { 255 / 255.0, 255 / 255.0, 255 / 255.0 }
+        { 243 / 255.0f, 60 / 255.0f, 45 / 255.0f },
+        { 107 / 255.0f, 242 / 255.0f, 0 },
+        { 0, 75 / 255.0f, 254 / 255.0f },
+        { 238 / 255.0f, 95 / 255.0f, 255 / 255.0f },
+        { 91 / 255.0f, 250 / 255.0f, 252 / 255.0f },
+        { 255 / 255.0f, 255 / 255.0f, 255 / 255.0f }
     };
 
       return (x, y) =>
@@ -85,13 +85,13 @@ namespace RayTracing
 
         i = Math.Min(i, cols - 1);
 
-        double t = (double)j / (rows - 1);
+        float t = (float)j / (rows - 1);
 
-        double brightness = (double)j / rows; // Wartość od 0 do 1
+        float brightness = (float)j / rows; // Wartość od 0 do 1
 
-        double R = firstRowColors[i, 0] * (1 - t) + lastRowColors[i, 0] * t;
-        double G = firstRowColors[i, 1] * (1 - t) + lastRowColors[i, 1] * t;
-        double B = firstRowColors[i, 2] * (1 - t) + lastRowColors[i, 2] * t;
+        float R = firstRowColors[i, 0] * (1 - t) + lastRowColors[i, 0] * t;
+        float G = firstRowColors[i, 1] * (1 - t) + lastRowColors[i, 1] * t;
+        float B = firstRowColors[i, 2] * (1 - t) + lastRowColors[i, 2] * t;
 
         return new LightIntensity(R, G, B);
       };

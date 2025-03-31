@@ -25,6 +25,17 @@ namespace Vector
             return !(v1 == v2);
         }
 
+        public static Vector operator +(Vector a, Vector b)
+        {
+            return new Vector(a.x + b.x, a.y + b.y, a.z + b.z);
+        }
+
+        // Mnożenie natężenia przez skalar
+        public static Vector operator *(Vector a, float scalar)
+        {
+            return new Vector(a.x * scalar, a.y * scalar, a.z * scalar);
+        }
+
         public override string ToString()
         {
             return $"Vector({x}, {y}, {z})";
