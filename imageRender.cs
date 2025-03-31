@@ -16,6 +16,9 @@ namespace RayTracing
         private Bitmap image;
         private int width, height;
 
+        public int Width { get { return width; } }
+        public int Height { get { return height; } }
+
         public ImageRenderer(int width, int height)
         {
             this.width = width;
@@ -39,14 +42,14 @@ namespace RayTracing
         }
 
         // NOWA FUNKCJA RENDERUJĄCA SCENĘ
-        public void RenderScene(Camera camera, List<IRenderableObject> objects, LightIntensity backgroundColor)
+        public void RenderScene(Camera camera, List<IRenderableObject> objects, Func<int, int, LightIntensity> backgroundColor)
         {
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
                     Ray ray = camera.GenerateRay(i, j);
-                    LightIntensity pixelColor = backgroundColor;
+                    LightIntensity pixelColor = backgroundColor(i, j);
                     float closestT = float.MaxValue;
                     
                     foreach (var obj in objects)
