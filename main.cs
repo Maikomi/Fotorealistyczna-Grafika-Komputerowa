@@ -28,16 +28,19 @@ namespace RayTracing
 
       Console.WriteLine("\n\nSPHERE");
 
-      int width = 500, height = 500;
+      int width = 1000, height = 1000;
       ImageRenderer renderer = new ImageRenderer(width, height);
       OrthographicCamera camera = new OrthographicCamera(width, height);
-      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f);
+      PerspectiveCamera camera2 = new PerspectiveCamera(width, height, 300.0f);
+      Sphere sphere = new Sphere(new Vec(0, 0, -10), 0.5f, new LightIntensity(0, 1, 0));
+      Sphere sphere2 = new Sphere(new Vec(0, 5.5f, -20.5f), 0.5f, new LightIntensity(0, 0, 1));
 
-      LightIntensity objectColor = new LightIntensity(0, 1, 0);
-      LightIntensity backgroundColor = new LightIntensity(0, 0, 0); // Czarny
+      List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
+
+      LightIntensity backgroundColor = new LightIntensity(0, 0, 0); 
 
       // RENDERUJEMY SCENĘ
-      renderer.RenderSphereScene(camera, sphere, objectColor, backgroundColor);
+      renderer.RenderScene(camera2, objects, backgroundColor);
 
       // ZAPISUJEMY OBRAZ
       renderer.SaveToFile("render_output.png");

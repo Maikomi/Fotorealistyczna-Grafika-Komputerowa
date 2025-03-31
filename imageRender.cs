@@ -5,6 +5,12 @@ using Vector;
 
 namespace RayTracing
 {
+    public interface IRenderableObject
+    {
+        bool Intersect(Ray ray, out float t);
+        LightIntensity GetColor();
+    }
+
     public class ImageRenderer
     {
         private Bitmap image;
@@ -33,22 +39,26 @@ namespace RayTracing
         }
 
         // NOWA FUNKCJA RENDERUJĄCA SCENĘ
-        public void RenderSphereScene(OrthographicCamera camera, Sphere sphere, LightIntensity objectColor, LightIntensity backgroundColor)
+        public void RenderScene(Camera camera, List<IRenderableObject> objects, LightIntensity backgroundColor)
         {
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
                     Ray ray = camera.GenerateRay(i, j);
+                    LightIntensity pixelColor = backgroundColor;
+                    float closestT = float.MaxValue;
+                    
+                    foreach (var obj in objects)
+                    {
+                        if (obj.Intersect(ray, out float t) && t < closestT)
+                        {
+                            closestT = t;
+                            pixelColor = obj.GetColor();
+                        }
+                    }
 
-                    if (Intersections.IntersectionSphere(ray, sphere, out _, out _))
-                    {
-                        SetPixel(i, j, objectColor);
-                    }
-                    else
-                    {
-                        SetPixel(i, j, backgroundColor);
-                    }
+                    SetPixel(i, j, pixelColor);
                 }
             }
         }

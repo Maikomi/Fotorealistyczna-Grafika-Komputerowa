@@ -1,9 +1,11 @@
-using System;
 using Vector;
 using Vec = Vector.Vector;
 using sqrtMatrix = SqrMatrix.SqrMatrix;
+using System.IO;
+using System.Numerics;
 using Plane = Vector.Plane;
 using Quaternion = Vector.Quaternion;
+using Lighting;
 
 
 
@@ -45,11 +47,12 @@ namespace RayTracing
       Console.WriteLine("\nTASK 5");
       Console.WriteLine("Normalized vector is: " + Vec.CrossProduct(v3, v4).Normalize());
 
-      //ZADANIE 6
+      //ZADANIE 6ś
       Console.WriteLine("\nTASK 6: IMPLEMENTED RAY, PLANE AND SPHERE CLASSES");
 
       //ZADANIE 7 - 9
-      Sphere sphere = new Sphere(new Vec(0, 0, 0), 10);
+      LightIntensity color = new LightIntensity(1, 0, 1);
+      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color);
       Ray ray1 = new Ray( new Vec(0, 0, -20), new Vec(0, 0, 1));
       Ray ray2 = new Ray( new Vec(0, 0, -20), new Vec(0, 1, 0));
       Console.WriteLine("\nTASK 7-9: SPHERE AND RAYS DEFINED");
