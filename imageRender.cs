@@ -42,25 +42,13 @@ namespace RayTracing
         }
 
         // NOWA FUNKCJA RENDERUJĄCA SCENĘ
-        public void RenderScene(Camera camera, List<IRenderableObject> objects, Func<int, int, LightIntensity> backgroundColor)
+        public void RenderScene(Camera camera, List<IRenderableObject> objects, Func<int, int, LightIntensity> backgroundColor, AdaptiveAntialiasing antialiasing)
         {
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    Ray ray = camera.GenerateRay(i, j);
-                    LightIntensity pixelColor = backgroundColor(i, j);
-                    float closestT = float.MaxValue;
-                    
-                    foreach (var obj in objects)
-                    {
-                        if (obj.Intersect(ray, out float t) && t < closestT)
-                        {
-                            closestT = t;
-                            pixelColor = obj.GetColor();
-                        }
-                    }
-
+                    LightIntensity pixelColor = antialiasing.QuincunxSample(i, j, camera, objects, backgroundColor);
                     SetPixel(i, j, pixelColor);
                 }
             }

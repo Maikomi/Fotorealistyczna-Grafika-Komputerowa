@@ -31,8 +31,11 @@ namespace RayTracing
 
       int width = 1000, height = 1000;
       ImageRenderer renderer = new ImageRenderer(width, height);
+      AdaptiveAntialiasing antialiasing = new AdaptiveAntialiasing(0.5f, 4);
+
       OrthographicCamera cameraOrtho = new OrthographicCamera(width, height);
       PerspectiveCamera cameraPer = new PerspectiveCamera(width, height, 90.0f);
+
       Sphere sphere = new Sphere(new Vec(0, 0, -10), 4, new LightIntensity(0, 0, 1));
       Sphere sphere2 = new Sphere(new Vec(6.5f, 0, -15), 3.5f , new LightIntensity(1, 0, 0));
 
@@ -41,11 +44,11 @@ namespace RayTracing
       Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);
 
       //Orthographic cam
-      renderer.RenderScene(cameraOrtho, objects, backgroundColor);
+      renderer.RenderScene(cameraOrtho, objects, backgroundColor, antialiasing);
       renderer.SaveToFile("render_output_ortho.png");
 
       //Perspective cam
-      renderer.RenderScene(cameraPer, objects, backgroundColor);
+      renderer.RenderScene(cameraPer, objects, backgroundColor, antialiasing);
       renderer.SaveToFile("render_output_perspective.png");
 
     }
