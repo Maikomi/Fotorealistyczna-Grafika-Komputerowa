@@ -49,7 +49,6 @@ namespace RayTracing
                 for (int j = 0; j < height; j++)
                 {
                     LightIntensity pixelColor = antialiasing.QuincunxSample(i, j, camera, objects, backgroundColor);
-                    //Console.WriteLine($"Pixel ({i},{j}) color: R={pixelColor.GetRed()}, G={pixelColor.GetGreen()}, B={pixelColor.GetBlue()}");
                     SetPixel(i, j, pixelColor);
                 }
             }

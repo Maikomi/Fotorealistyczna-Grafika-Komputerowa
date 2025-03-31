@@ -37,7 +37,7 @@ namespace RayTracing
       PerspectiveCamera cameraPer = new PerspectiveCamera(width, height, 90.0f);
 
       Sphere sphere = new Sphere(new Vec(0, 0, -10), 4, new LightIntensity(0, 0, 1));
-      Sphere sphere2 = new Sphere(new Vec(6.5f, 0, -15), 3.5f , new LightIntensity(1, 0, 0));
+      Sphere sphere2 = new Sphere(new Vec(6.5f, 0, -15), 3.5f, new LightIntensity(1, 0, 0));
 
       List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
 
@@ -58,42 +58,41 @@ namespace RayTracing
       int sqWidth = width / cols;
       int sqHeight = height / rows;
 
-      float[,] firstRowColors = new float[,]
-    {
-        { 19.0f / 255.0f, 1.0f / 255.0f, 1 / 255.0f },
-        { 3 / 255.0f, 18 / 255.0f, 0 },
-        { 0, 2 / 255.0f, 20 / 255.0f },
-        { 243 / 255.0f, 60 / 255.0f, 51 / 255.0f },
-        { 107 / 255.0f, 242 / 255.0f, 0 },
-        { 255 / 255.0f, 247 / 255.0f, 38 / 255.0f }
-    };
-
-    float[,] lastRowColors = new float[,]
-    {
-        { 243 / 255.0f, 60 / 255.0f, 45 / 255.0f },
-        { 107 / 255.0f, 242 / 255.0f, 0 },
-        { 0, 75 / 255.0f, 254 / 255.0f },
-        { 238 / 255.0f, 95 / 255.0f, 255 / 255.0f },
-        { 91 / 255.0f, 250 / 255.0f, 252 / 255.0f },
-        { 255 / 255.0f, 255 / 255.0f, 255 / 255.0f }
-    };
+      float[,] lastRowColors = new float[,]
+      {
+        { 1, 0, 0 },
+        { 0, 1, 0 },
+        { 0, 0, 1 },
+        { 1, 0, 1 },
+        { 0, 1, 1 },
+        { 1, 1, 1 }
+      };
 
       return (x, y) =>
       {
         int i = x / sqWidth;
         int j = y / sqHeight;
 
-        i = Math.Min(i, cols - 1);
+        i = Math.Min(i, rows - 1);
 
         float t = (float)j / (rows - 1);
 
-        float brightness = (float)j / rows; // Wartość od 0 do 1
+        if (i < 3)
+        {
+          float factor = t * 0.2f + 0.2f;
+          float R = lastRowColors[i, 0] * factor;
+          float G = lastRowColors[i, 1] * factor;
+          float B = lastRowColors[i, 2] * factor;
+          return new LightIntensity(R, G, B);
+        }
+        else
+        {
+          float R = lastRowColors[i, 0] + (0.5f * (1 - t));
+          float G = lastRowColors[i, 1] + (0.5f * (1 - t));
+          float B = lastRowColors[i, 2] * t;
 
-        float R = firstRowColors[i, 0] * (1 - t) + lastRowColors[i, 0] * t;
-        float G = firstRowColors[i, 1] * (1 - t) + lastRowColors[i, 1] * t;
-        float B = firstRowColors[i, 2] * (1 - t) + lastRowColors[i, 2] * t;
-
-        return new LightIntensity(R, G, B);
+          return new LightIntensity(R, G, B);
+        }
       };
     }
 

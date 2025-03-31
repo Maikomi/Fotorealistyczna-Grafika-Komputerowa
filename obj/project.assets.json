@@ -133,19 +133,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\majka\\.nuget\\packages\\": {}
+    "C:\\Users\\karol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj",
+      "projectUniqueName": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
       "projectName": "fotorealistyczna",
-      "projectPath": "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj",
-      "packagesPath": "C:\\Users\\majka\\.nuget\\packages\\",
-      "outputPath": "D:\\studia\\fotorealistyczna\\obj\\",
+      "projectPath": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
+      "packagesPath": "C:\\Users\\karol\\.nuget\\packages\\",
+      "outputPath": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\majka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\karol\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
