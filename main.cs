@@ -87,8 +87,8 @@ namespace RayTracing
         }
         else
         {
-          float R = lastRowColors[i, 0] + (0.5f * (1 - t));
-          float G = lastRowColors[i, 1] + (0.5f * (1 - t));
+          float R = lastRowColors[i, 0];
+          float G = lastRowColors[i, 1];
           float B = lastRowColors[i, 2] * t;
 
           return new LightIntensity(R, G, B);
