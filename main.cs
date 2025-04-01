@@ -77,9 +77,9 @@ namespace RayTracing
 
         float t = (float)j / (rows - 1);
 
-        if (i < 3)
+        if (i < 3 && j != (rows-1))
         {
-          float factor = t * 0.2f + 0.2f;
+          float factor = t * 0.3f + 0.3f;
           float R = lastRowColors[i, 0] * factor;
           float G = lastRowColors[i, 1] * factor;
           float B = lastRowColors[i, 2] * factor;

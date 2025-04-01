@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj": {}
+    "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj": {}
   },
   "projects": {
-    "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj": {
+    "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
+        "projectUniqueName": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
         "projectName": "fotorealistyczna",
-        "projectPath": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
-        "packagesPath": "C:\\Users\\karol\\.nuget\\packages\\",
-        "outputPath": "D:\\Studies\\SEM1\\PhotorealisticCG\\Fotorealistyczna-Grafika-Komputerowa\\obj\\",
+        "projectPath": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
+        "packagesPath": "C:\\Users\\majka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\karol\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\majka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
