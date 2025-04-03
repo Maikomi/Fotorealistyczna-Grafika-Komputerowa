@@ -96,6 +96,9 @@ ClientBin/
 *~
 *.dbmdl
 *.[Pp]ublish.xml
+*.AssemblyInfo.cs
+*.cache
+*.editorconfig
 
 *.publishsettings
 
