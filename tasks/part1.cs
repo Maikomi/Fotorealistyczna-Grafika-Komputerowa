@@ -1,13 +1,9 @@
 using Vector;
 using Vec = Vector.Vector;
 using sqrtMatrix = SqrMatrix.SqrMatrix;
-using System.IO;
-using System.Numerics;
 using Plane = Vector.Plane;
 using Quaternion = Vector.Quaternion;
 using Lighting;
-
-
 
 namespace RayTracing
 {

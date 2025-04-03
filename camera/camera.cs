@@ -1,5 +1,3 @@
-using System;
-using System.Drawing;
 using Vector;
 
 public abstract class Camera

@@ -1,5 +1,3 @@
-using System;
-using System.Drawing;
 using Lighting;
 using Vector;
 using Vec = Vector.Vector;

@@ -1,7 +1,3 @@
-using System;
-using System.ComponentModel;
-using System.Numerics;
-using System.Runtime.Serialization;
 namespace Vector
 {
     public static class Intersections
