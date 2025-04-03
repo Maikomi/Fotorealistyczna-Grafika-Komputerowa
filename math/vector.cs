@@ -29,10 +29,25 @@ namespace Vector
             return new Vector(a.x + b.x, a.y + b.y, a.z + b.z);
         }
 
+        public static Vector operator -(Vector a, Vector b)
+        {
+            return new Vector(a.x - b.x, a.y - b.y, a.z - b.z);
+        }
+
+        public static Vector operator -(Vector v)
+        {
+            return new Vector(-v.x, -v.y, -v.z);
+        }
+
         // Mnożenie natężenia przez skalar
         public static Vector operator *(Vector a, float scalar)
         {
             return new Vector(a.x * scalar, a.y * scalar, a.z * scalar);
+        }
+
+        public static Vector Reflect(Vector vector, Vector normal)
+        {
+            return vector - normal * Vector.DotProduct(vector, normal) * 2;
         }
 
         public override string ToString()
@@ -43,12 +58,12 @@ namespace Vector
         public float VectorLength()
         {
             return (float)Math.Sqrt(x * x + y * y + z * z);
-        } 
+        }
 
         public Vector Normalize()
         {
             float length = this.VectorLength();
-            return length == 0 ? new Vector(0, 0, 0) : new Vector(this.x/length, this.y/length, this.z/length); 
+            return length == 0 ? new Vector(0, 0, 0) : new Vector(this.x / length, this.y / length, this.z / length);
         }
 
         public static Vector Add(Vector v1, Vector v2)
@@ -84,7 +99,7 @@ namespace Vector
             float dot = DotProduct(v1, v2);
             float len1 = v1.VectorLength();
             float len2 = v2.VectorLength();
-            float angleInRadians = (float)Math.Acos(dot/(len1 * len2));
+            float angleInRadians = (float)Math.Acos(dot / (len1 * len2));
             float angleInDegrees = angleInRadians * 180 / (float)Math.PI;
             return angleInDegrees;
         }

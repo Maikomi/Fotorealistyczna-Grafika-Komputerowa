@@ -8,6 +8,8 @@ namespace RayTracing
     {
         bool Intersect(Ray ray, out float t);
         LightIntensity GetColor();
+
+        Material GetMaterial();
     }
 
     public class ImageRenderer
