@@ -22,15 +22,17 @@ namespace RayTracing
       PerspectiveCamera cameraPer = new PerspectiveCamera(width, height, 90.0f);
       OrthographicCamera cameraOrtho = new OrthographicCamera(width, height);
 
-      LightIntensity color = new LightIntensity(1, 1, 1);
-      Material material = new Material(color, 0.1f, 0.1f, 0.9f, 10);
+      LightIntensity color = new LightIntensity(0, 1, 0);
+      Material material = new Material(color, 0.1f, 0.1f, 0.9f, 100);
       Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
+      PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10);
 
       List<IRenderableObject> objects = new List<IRenderableObject> { sphere };
+      List<LightSource> lights = new List<LightSource> {pointLight};
 
-      Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);
+      Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);   
 
-      renderer.RenderScene(cameraOrtho, objects, backgroundColor, antialiasing);
+      renderer.RenderScene(cameraOrtho, objects, lights, backgroundColor, antialiasing);
       renderer.SaveToFile("render_output.png");
     }
     static Func<int, int, LightIntensity> GenerateBackground(int rows, int cols, int width, int height)

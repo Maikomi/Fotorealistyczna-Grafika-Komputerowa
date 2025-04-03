@@ -1,4 +1,5 @@
 using System.Numerics;
+using Lighting;
 using RayTracing;
 
 namespace Vector
@@ -8,10 +9,13 @@ namespace Vector
         public override Vector Position { get; }
         public override float Intensity { get; }
 
-        public PointLight(Vector position, float intensity = 1.0f)
+        public LightIntensity Color {get; set; }
+
+        public PointLight(Vector position, float intensity = 1.0f, LightIntensity? color = null)
         {
             Position = position;
             Intensity = intensity;
+            Color = color ?? new LightIntensity(1, 1, 1);
         }
         public override Vector Illuminate(Vector point, Vector normal, Vector viewDir, Material material, List<IRenderableObject> objects)
         {
@@ -28,7 +32,7 @@ namespace Vector
 
             // Diffuse shading
             float diff = MathF.Max(Vector.DotProduct(normal, lightDir), 0);
-            Vector diffuse = material.Color * material.Diffuse *  diff;
+            Vector diffuse = material.Color * material.Diffuse * diff;
 
             // Specular shading
             Vector reflectDir = Vector.Reflect(-lightDir, normal);

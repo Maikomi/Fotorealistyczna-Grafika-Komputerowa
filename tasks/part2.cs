@@ -34,17 +34,19 @@ namespace RayTracing
       Material material = new Material(color, 0.1f, 0.1f, 0.9f, 10);
       Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
       Sphere sphere2 = new Sphere(new Vec(6.5f, 0, -15), 3.5f, new LightIntensity(1, 0, 0), material);
+      PointLight pointLight = new PointLight(new Vec(0, 1, 0), 1);
 
       List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
+      List<LightSource> lights = new List<LightSource> {pointLight};
 
       Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);
 
       //Orthographic cam
-      renderer.RenderScene(cameraOrtho, objects, backgroundColor, antialiasing);
+      renderer.RenderScene(cameraOrtho, objects, lights, backgroundColor, antialiasing);
       renderer.SaveToFile("render_output_ortho.png");
 
       //Perspective cam
-      renderer.RenderScene(cameraPer, objects, backgroundColor, antialiasing);
+      renderer.RenderScene(cameraPer, objects, lights, backgroundColor, antialiasing);
       renderer.SaveToFile("render_output_perspective.png");
     }
     static Func<int, int, LightIntensity> GenerateBackground(int rows, int cols, int width, int height)

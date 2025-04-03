@@ -61,13 +61,34 @@ namespace RayTracing
             return result;
         }
 
-        public void RenderScene(Camera camera, List<IRenderableObject> objects, Func<int, int, LightIntensity> backgroundColor, AdaptiveAntialiasing antialiasing)
+        public void RenderScene(Camera camera, List<IRenderableObject> objects, List<LightSource> lights, Func<int, int, LightIntensity> backgroundColor, AdaptiveAntialiasing antialiasing)
         {
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    LightIntensity pixelColor = antialiasing.QuincunxSample(i, j, camera, objects, backgroundColor);
+                    Ray ray = camera.GenerateRay(i, j);
+                    LightIntensity pixelColor = backgroundColor(i, j);
+
+                    float closestT = float.MaxValue;
+                    IRenderableObject closestObject = null;
+
+                    foreach (var obj in objects)
+                    {
+                        if (obj.Intersect(ray, out float t) && t < closestT)
+                        {
+                            closestT = t;
+                            closestObject = obj;
+                        }
+                    }
+
+                    if (closestObject != null)
+                    {
+                        Vec hitPoint = ray.Origin + ray.Direction * closestT;
+                        Vec viewDir = -ray.Direction.Normalize();
+                        pixelColor = PhongLighting(hitPoint, viewDir, closestObject, lights);
+                    }
+
                     SetPixel(i, j, pixelColor);
                 }
             }
