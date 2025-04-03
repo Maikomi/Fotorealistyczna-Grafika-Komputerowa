@@ -27,6 +27,11 @@ namespace Vector
             return Material;
         }
 
+        public Vector GetNormal(Vector point)
+        {
+            return (point - Center).Normalize();
+        }
+
         public bool Intersect(Ray ray, out float t)
         {
             if (Intersections.IntersectionSphere(ray, this, out float intersection0, out float intersection1))

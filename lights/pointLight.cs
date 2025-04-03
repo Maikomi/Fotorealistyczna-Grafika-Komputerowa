@@ -5,8 +5,8 @@ namespace Vector
 {
     class PointLight : LightSource
     {
-        public Vector Position { get; }
-        public float Intensity { get; }
+        public override Vector Position { get; }
+        public override float Intensity { get; }
 
         public PointLight(Vector position, float intensity = 1.0f)
         {

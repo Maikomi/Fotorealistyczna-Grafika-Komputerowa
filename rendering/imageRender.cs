@@ -1,6 +1,7 @@
 using System.Drawing;
 using Lighting;
 using Vector;
+using Vec = Vector.Vector;
 
 namespace RayTracing
 {
@@ -8,8 +9,8 @@ namespace RayTracing
     {
         bool Intersect(Ray ray, out float t);
         LightIntensity GetColor();
-
         Material GetMaterial();
+        Vec GetNormal(Vec point);
     }
 
     public class ImageRenderer
@@ -42,7 +43,24 @@ namespace RayTracing
             Console.WriteLine($"Image has been saved as {filename}");
         }
 
-        // NOWA FUNKCJA RENDERUJĄCA SCENĘ
+        public LightIntensity PhongLighting(Vec point, Vec viewDir, IRenderableObject obj, List<LightSource> lights)
+        {
+            Material material = obj.GetMaterial();
+            Vec normal = obj.GetNormal(point);
+            LightIntensity result = new LightIntensity(material.Color.x, material.Color.y, material.Color.z) * material.Ambient;
+            foreach (var light in lights)
+            {
+                Vec lightDir = (light.Position - point).Normalize();
+                float diff = Math.Max(Vec.DotProduct(normal, lightDir), 0);
+                Vec reflectDir = (normal * Vec.DotProduct(normal, lightDir) * 2 - lightDir).Normalize();
+                float spec = (float)Math.Pow(Math.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
+
+                result += new LightIntensity(material.Diffuse * diff) * light.Intensity + new LightIntensity(material.Specular * spec) * light.Intensity;
+            }
+
+            return result;
+        }
+
         public void RenderScene(Camera camera, List<IRenderableObject> objects, Func<int, int, LightIntensity> backgroundColor, AdaptiveAntialiasing antialiasing)
         {
             for (int i = 0; i < width; i++)
