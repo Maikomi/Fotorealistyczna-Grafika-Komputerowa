@@ -8,7 +8,7 @@ namespace RayTracing
   {
     public static void Part2()
     {
-    Console.WriteLine("\n\nPART TWO");
+      Console.WriteLine("\n\nPART TWO");
       LightIntensity light1 = new LightIntensity(0.7f, 0.8f, 0.5f);
       LightIntensity light2 = new LightIntensity(0.5f, 0.3f, 0.6f);
       LightIntensity sum = light1 + light2; // nie może przekroczyć 1
@@ -30,8 +30,10 @@ namespace RayTracing
       OrthographicCamera cameraOrtho = new OrthographicCamera(width, height);
       PerspectiveCamera cameraPer = new PerspectiveCamera(width, height, 90.0f);
 
-      Sphere sphere = new Sphere(new Vec(0, 0, -10), 4, new LightIntensity(0, 0, 1));
-      Sphere sphere2 = new Sphere(new Vec(6.5f, 0, -15), 3.5f, new LightIntensity(1, 0, 0));
+      LightIntensity color = new LightIntensity(1, 0, 1);
+      Material material = new Material(color, 0.1f, 1, 0.3f, 10);
+      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
+      Sphere sphere2 = new Sphere(new Vec(6.5f, 0, -15), 3.5f, new LightIntensity(1, 0, 0), material);
 
       List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
 
@@ -45,7 +47,7 @@ namespace RayTracing
       renderer.RenderScene(cameraPer, objects, backgroundColor, antialiasing);
       renderer.SaveToFile("render_output_perspective.png");
     }
-     static Func<int, int, LightIntensity> GenerateBackground(int rows, int cols, int width, int height)
+    static Func<int, int, LightIntensity> GenerateBackground(int rows, int cols, int width, int height)
     {
       int sqWidth = width / cols;
       int sqHeight = height / rows;
@@ -69,7 +71,7 @@ namespace RayTracing
 
         float t = (float)j / (rows - 1);
 
-        if (i < 3 && j != (rows-1))
+        if (i < 3 && j != (rows - 1))
         {
           float factor = t * 0.3f + 0.3f;
           float R = lastRowColors[i, 0] * factor;

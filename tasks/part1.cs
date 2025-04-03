@@ -48,7 +48,8 @@ namespace RayTracing
 
       //ZADANIE 7 - 9
       LightIntensity color = new LightIntensity(1, 0, 1);
-      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color);
+      Material material = new Material(color, 0.1f, 1, 0.3f, 10);
+      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
       Ray ray1 = new Ray( new Vec(0, 0, -20), new Vec(0, 0, 1));
       Ray ray2 = new Ray( new Vec(0, 0, -20), new Vec(0, 1, 0));
       Console.WriteLine("\nTASK 7-9: SPHERE AND RAYS DEFINED");

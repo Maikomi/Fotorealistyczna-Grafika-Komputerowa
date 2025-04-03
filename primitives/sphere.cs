@@ -8,16 +8,23 @@ namespace Vector
         public Vector Center { get; set; }
         public float Radius { get; set; }
         public LightIntensity Color { get; set; }
+        public Material Material {get; set;}
 
-        public Sphere(Vector center, float radius, LightIntensity color)
+        public Sphere(Vector center, float radius, LightIntensity color, Material material)
         {
             Center = center ?? new Vector(0, 0, 0);
             Radius = radius;
             Color = color;
+            Material = material;
         }
          public LightIntensity GetColor()
         {
             return Color;
+        }
+
+         public Material GetMaterial()
+        {
+            return Material;
         }
 
         public bool Intersect(Ray ray, out float t)

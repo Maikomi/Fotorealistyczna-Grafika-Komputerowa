@@ -1,10 +1,12 @@
 using System.Numerics;
 using RayTracing;
+using Vector;
+using Vec = Vector.Vector;
 
-namespace Vector
+namespace RayTracing
 {
     abstract class LightSource
     {
-        public abstract Vector Illuminate(Vector point, Vector normal, Vector viewDir, Material material, List<IRenderableObject> objects);
+        public abstract Vec Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects);
     }
 }
