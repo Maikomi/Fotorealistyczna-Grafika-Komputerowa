@@ -22,8 +22,8 @@ namespace RayTracing
       PerspectiveCamera cameraPer = new PerspectiveCamera(width, height, 90.0f);
       OrthographicCamera cameraOrtho = new OrthographicCamera(width, height);
 
-      LightIntensity color = new LightIntensity(0, 1, 0);
-      Material material = new Material(color, 0.1f, 0.1f, 0.9f, 100);
+      LightIntensity color = new LightIntensity(0, 0, 1);
+      Material material = new Material(color, 0.15f, 0.1f, 0.9f, 100);
       Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
       PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10);
 
