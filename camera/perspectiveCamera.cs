@@ -17,7 +17,7 @@ public class PerspectiveCamera : Camera
         float centerX = (2 * ((x + 0.5f) / Width) - 1) * aspectRatio * fovAdjustment;
         float centerY = (1 - 2 * ((y + 0.5f) / Height)) * fovAdjustment;
 
-        Vector.Vector origin = new Vector.Vector(0, 0, 0);
+        Vector.Vector origin = new Vector.Vector(0, 0, 1);
         Vector.Vector direction = new Vector.Vector(centerX, centerY, -1).Normalize();
         
         return new Ray(origin, direction);

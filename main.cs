@@ -25,15 +25,20 @@ namespace RayTracing
       LightIntensity color = new LightIntensity(0, 0, 1);
       Material material = new Material(color, 0.15f, 0.1f, 0.9f, 100);
       Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
+
+      LightIntensity color2 = new LightIntensity(1, 0, 0);
+      Material material2 = new Material(color2, 0.4f, 0.2f, 0.8f, 50);
+      Sphere sphere2 = new Sphere(new Vec(1f, 0, -1), 0.5f, color2, material2);
+
       PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10);
 
-      List<IRenderableObject> objects = new List<IRenderableObject> { sphere };
+      List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
       List<LightSource> lights = new List<LightSource> {pointLight};
 
       Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);   
 
-      renderer.RenderScene(cameraOrtho, objects, lights, backgroundColor, antialiasing);
-      renderer.SaveToFile("render_output.png");
+      renderer.RenderScene(cameraPer, objects, lights, backgroundColor, antialiasing);
+      renderer.SaveToFile("render_per_output.png");
     }
     static Func<int, int, LightIntensity> GenerateBackground(int rows, int cols, int width, int height)
     {
