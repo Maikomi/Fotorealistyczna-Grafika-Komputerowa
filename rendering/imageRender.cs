@@ -52,7 +52,7 @@ namespace RayTracing
             {
                 Vec lightDir = (light.Position - point).Normalize();
                 float diff = Math.Max(Vec.DotProduct(normal, lightDir), 0);
-                Vec reflectDir = (lightDir - normal * 2 * Vec.DotProduct(normal, lightDir)).Normalize();
+                Vec reflectDir = Vec.Reflect(-lightDir, normal).Normalize();
 
                 float spec = (float)Math.Pow(Math.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
 

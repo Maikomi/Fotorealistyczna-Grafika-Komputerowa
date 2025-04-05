@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1yW4AMWam0Y=",
+  "dgSpecHash": "+5TwUYn+2nE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
+  "projectFilePath": "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\majka\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.3\\microsoft.win32.systemevents.9.0.3.nupkg.sha512",
     "C:\\Users\\majka\\.nuget\\packages\\system.drawing.common\\9.0.3\\system.drawing.common.9.0.3.nupkg.sha512"

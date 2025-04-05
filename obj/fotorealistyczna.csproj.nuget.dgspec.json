@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj": {}
+    "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj": {}
   },
   "projects": {
-    "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj": {
+    "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
+        "projectUniqueName": "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj",
         "projectName": "fotorealistyczna",
-        "projectPath": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\fotorealistyczna.csproj",
+        "projectPath": "D:\\studia\\fotorealistyczna\\fotorealistyczna.csproj",
         "packagesPath": "C:\\Users\\majka\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\majka\\OneDrive\\Pulpit\\ray-tracing\\Fotorealistyczna-Grafika-Komputerowa\\obj\\",
+        "outputPath": "D:\\studia\\fotorealistyczna\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\majka\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\majka\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
