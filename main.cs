@@ -30,10 +30,19 @@ namespace RayTracing
       Material material2 = new Material(color2, 0.4f, 0.2f, 0.8f, 50);
       Sphere sphere2 = new Sphere(new Vec(1f, 0, -1), 0.5f, material2);
 
-      PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10);
+      PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10, new LightIntensity(1, 0, 0));
+      SurfaceLight surfaceLight = new SurfaceLight
+      (new Vec(3, 5, 0), 
+      new Vec(0, -1, 0), 
+      new Vec(1, 0, 0),
+      width: 4.0f,
+      height: 2.0f,
+      intensity: 20.0f,
+      color: new LightIntensity(1, 0, 0)
+      );
 
       List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
-      List<LightSource> lights = new List<LightSource> {pointLight};
+      List<LightSource> lights = new List<LightSource> {pointLight, surfaceLight};
 
       Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);   
 

@@ -45,6 +45,12 @@ namespace Vector
             return new Vector(a.x * scalar, a.y * scalar, a.z * scalar);
         }
 
+        public static Vector operator *(Vector a, Vector b)
+        {
+            return new Vector(a.x * b.x, a.y * b.y, a.z * b.z);
+        }
+
+
         public static Vector Reflect(Vector vector, Vector normal)
         {
             return vector - normal * Vector.DotProduct(vector, normal) * 2;
