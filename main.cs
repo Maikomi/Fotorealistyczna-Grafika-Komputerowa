@@ -24,11 +24,11 @@ namespace RayTracing
 
       LightIntensity color = new LightIntensity(0, 0, 1);
       Material material = new Material(color, 0.15f, 0.1f, 0.9f, 100);
-      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, color, material);
+      Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, material);
 
       LightIntensity color2 = new LightIntensity(1, 0, 0);
       Material material2 = new Material(color2, 0.4f, 0.2f, 0.8f, 50);
-      Sphere sphere2 = new Sphere(new Vec(1f, 0, -1), 0.5f, color2, material2);
+      Sphere sphere2 = new Sphere(new Vec(1f, 0, -1), 0.5f, material2);
 
       PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10);
 

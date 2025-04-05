@@ -64,7 +64,7 @@ namespace RayTracing
                 if (obj.Intersect(ray, out float t) && t < closestT)
                 {
                     closestT = t;
-                    pixelColor = obj.GetColor();
+                    pixelColor = new LightIntensity(obj.GetMaterial().Color.x, obj.GetMaterial().Color.y, obj.GetMaterial().Color.z);
                 }
             }
 

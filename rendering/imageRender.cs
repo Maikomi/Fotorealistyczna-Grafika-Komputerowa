@@ -8,7 +8,6 @@ namespace RayTracing
     public interface IRenderableObject
     {
         bool Intersect(Ray ray, out float t);
-        LightIntensity GetColor();
         Material GetMaterial();
         Vec GetNormal(Vec point);
     }
