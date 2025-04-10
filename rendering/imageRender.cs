@@ -46,23 +46,13 @@ namespace RayTracing
         {
             Material material = obj.GetMaterial();
             Vec normal = obj.GetNormal(point);
-            Vec result = new LightIntensity(material.Color.x, material.Color.y, material.Color.z) * material.Ambient;
+            LightIntensity result = new LightIntensity(material.Color.x, material.Color.y, material.Color.z) * material.Ambient;
+
             foreach (var light in lights)
             {
-                Vec lightDir = (light.Position - point).Normalize();
-                float diff = Math.Max(Vec.DotProduct(normal, lightDir), 0);
-                Vec reflectDir = Vec.Reflect(-lightDir, normal).Normalize();
-
-                float spec = (float)Math.Pow(Math.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
-
-                result += material.Color * material.Diffuse * diff * light.Intensity
-                      + new LightIntensity(1,1,1) * material.Specular * spec * light.Intensity;
-
-
+               result += light.Illuminate(point, normal, viewDir, material, new List<IRenderableObject> { obj }, obj);
             }
-            LightIntensity lightResult = new LightIntensity(result.x, result.y, result.z);
-
-            return lightResult;
+            return result.Clamped();
         }
 
         public void RenderScene(Camera camera, List<IRenderableObject> objects, List<LightSource> lights, Func<int, int, LightIntensity> backgroundColor, AdaptiveAntialiasing antialiasing)

@@ -18,17 +18,20 @@ namespace Lighting
             Intensity = intensity;
             Color = color ?? new LightIntensity(1, 1, 1);
         }
-        public override Vec Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects)
+        public override LightIntensity Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects,  IRenderableObject currentObject)
         {
-            Vec lightDir = Position - point;
-            lightDir.Normalize();
+            Vec lightDir = (Position - point).Normalize();
 
             // Shadow check
             Vec shadowRayOrigin = point + normal * 0.001f;
             foreach (var obj in objects)
             {
                 if (obj.Intersect(new Ray(shadowRayOrigin, lightDir), out _))
-                    return material.Color * material.Ambient;
+                {
+                    Vec result1 = material.Color * material.Ambient;
+                    return new LightIntensity(result1.x, result1.y, result1.z);
+                }
+
             }
 
             Vec effectiveColor = this.Color * this.Intensity;
@@ -42,7 +45,9 @@ namespace Lighting
             float spec = MathF.Pow(MathF.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
             Vec specular = effectiveColor * material.Specular * spec;
 
-            return material.Color * material.Ambient + diffuse + specular;
+            Vec result = material.Color * material.Ambient + diffuse + specular;
+            return new LightIntensity(result.x, result.y, result.z);
+
         }
     }
 }

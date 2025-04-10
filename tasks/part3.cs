@@ -16,26 +16,27 @@ namespace RayTracing
             OrthographicCamera cameraOrtho = new OrthographicCamera(width, height);
 
             LightIntensity color = new LightIntensity(0, 0, 1);
-            Material material = new Material(color, 0.15f, 0.1f, 0.9f, 100);
+            Material material = new Material(color, 0.15f, 0.7f, 0.9f, 100);
             Sphere sphere = new Sphere(new Vec(0, 0, 0), 0.5f, material);
 
             LightIntensity color2 = new LightIntensity(1, 0, 0);
-            Material material2 = new Material(color2, 0.4f, 0.2f, 0.8f, 50);
+            Material material2 = new Material(color2, 0.4f, 0.9f, 0.8f, 50);
             Sphere sphere2 = new Sphere(new Vec(1f, 0, -1), 0.5f, material2);
 
-            PointLight pointLight = new PointLight(new Vec(0, 1, 1), 10, new LightIntensity(1, 0, 0));
+            PointLight pointLight = new PointLight(new Vec(0, 1, 1), 100, new LightIntensity(1, 0, 0));
+             PointLight pointLight2 = new PointLight(new Vec(0, 1, 1), 1000, new LightIntensity(1, 1, 1));
             SurfaceLight surfaceLight = new SurfaceLight
             (new Vec(3, 5, 0),
             new Vec(0, -1, 0),
             new Vec(1, 0, 0),
             width: 4.0f,
             height: 2.0f,
-            intensity: 20.0f,
-            color: new LightIntensity(1, 0, 0)
+            intensity: 200.0f,
+            color: new LightIntensity(0, 1, 0)
             );
 
             List<IRenderableObject> objects = new List<IRenderableObject> { sphere, sphere2 };
-            List<LightSource> lights = new List<LightSource> { pointLight, surfaceLight };
+            List<LightSource> lights = new List<LightSource> { pointLight, surfaceLight, pointLight2 };
 
             Func<int, int, LightIntensity> backgroundColor = GenerateBackground(6, 6, width, height);
 
