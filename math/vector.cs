@@ -129,5 +129,29 @@ namespace Vector
         {
             throw new NotImplementedException();
         }
+
+        public static float LengthSquared(Vector v)
+        {
+            return v.x * v.x + v.y * v.y + v.z * v.z;
+        }
+
+        public static Vector Refract(Vector uv, Vector n, float etaiOverEtat)
+        {
+            float cosTheta = MathF.Min(DotProduct(-uv, n), 1.0f);
+            Vector rOutPerp = (uv + n * cosTheta) * etaiOverEtat;
+            Vector rOutParallel = n * -MathF.Sqrt(MathF.Abs(1.0f - LengthSquared(rOutPerp)));
+            return rOutPerp + rOutParallel;
+        }
+
+        private static Random rand = new Random();
+
+        public static Vector RandomUnitVector()
+        {
+            float a = (float)(rand.NextDouble() * 2 * Math.PI);
+            float z = (float)(rand.NextDouble() * 2 - 1);
+            float r = MathF.Sqrt(1 - z * z);
+            return new Vector(r * MathF.Cos(a), r * MathF.Sin(a), z);
+        }
+
     }
 }

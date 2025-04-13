@@ -1,8 +1,16 @@
 using Vector;
 using Vec = Vector.Vector;
+using Lighting;
 
 namespace RayTracing
 {
+    public enum MaterialType
+    {
+        Diffuse,
+        Reflective,
+        Refractive
+    }
+
     public class Material
     {
         public Vec Color { get; }
@@ -18,6 +26,14 @@ namespace RayTracing
             Diffuse = diffuse;
             Specular = specular;
             Shininess = shininess;
+        }
+
+        // Domyślnie materiał nie rozprasza promienia – nadpisują to klasy pochodne
+        public virtual bool Scatter(Ray rayIn, Vec hitPoint, Vec normal, out Ray scattered, out LightIntensity attenuation)
+        {
+            scattered = null!;
+            attenuation = new LightIntensity(0, 0, 0);
+            return false;
         }
     }
 } 
