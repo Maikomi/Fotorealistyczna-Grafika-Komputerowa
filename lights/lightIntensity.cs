@@ -48,6 +48,11 @@ namespace Lighting
             return new Vector.Vector(d.GetRed(),d.GetGreen(), d.GetBlue());
         }
 
+        public static implicit operator Func<object, object, object>(LightIntensity v)
+        {
+            throw new NotImplementedException();
+        }
+
         // aby wartości ujemne zamieniały się w 0
         private void Clamp()
         {
