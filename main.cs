@@ -29,7 +29,6 @@ namespace RayTracing
             var floor = new Plane(new Vec(0, -1, 0), new Vec(0, 1, 0), diffuseWhite);
             var ceiling = new Plane(new Vec(0, 1, 0), new Vec(0, -1, 0), diffuseWhite);
             var backWall = new Plane(new Vec(0, 0, -3), new Vec(0, 0, 1), diffuseWhite);
-            var frontWall = new Plane(new Vec(0, 0, -3), new Vec(0, 0, 1), diffuseWhite);
             var leftWall = new Plane(new Vec(-1, 0, 0), new Vec(1, 0, 0), diffuseRed);
             var rightWall = new Plane(new Vec(1, 0, 0), new Vec(-1, 0, 0), diffuseBlue);
 
@@ -39,26 +38,27 @@ namespace RayTracing
 
             // Światło
             var surfaceLight = new SurfaceLight(
-                new Vec(0, 0.99f, -1), 
+                new Vec(0, 0.95f, -1.5f), 
                 new Vec(0, -1, 0),
                 new Vec(1, 0, 0),
-                width: 20.0f,
-                height: 10.5f,
-                intensity: 10000.0f,
+                width: 2.0f,
+                height: 1.5f,
+                intensity: 1.0f,
                 color: new LightIntensity(1, 1, 1)
             );
 
-            var pointLight = new PointLight(new Vec(0, 0.99f, -1), 100, new LightIntensity(1, 1, 1));
+            //var pointLight = new PointLight(new Vec(0, 0.99f, -1), 100, new LightIntensity(1, 1, 1));
 
             // Obiekty i światła
             var objects = new List<IRenderableObject>
             {
-                floor, ceiling, backWall, leftWall, rightWall, frontWall,
+                floor, ceiling, backWall, leftWall, rightWall,
                 mirrorSphere, glassSphere
             };
 
             var lights = new List<LightSource>
             {
+                //pointLight
                 surfaceLight
             };
 

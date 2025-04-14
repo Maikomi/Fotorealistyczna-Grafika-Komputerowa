@@ -38,8 +38,9 @@ namespace RayTracing
 
         public void SaveToFile(string filename)
         {
-            image.Save(filename);
-            Console.WriteLine($"Image has been saved as {filename}");
+            string fullPath = Path.GetFullPath(filename);
+            image.Save(fullPath);
+            Console.WriteLine($"Image has been saved as {fullPath}");
         }
 
         
@@ -59,7 +60,7 @@ namespace RayTracing
         }
 
 
-        public LightIntensity TraceRay(Ray ray, List<IRenderableObject> objects, List<LightSource> lights, int depth = 0, int maxDepth = 4)
+        public LightIntensity TraceRay(Ray ray, List<IRenderableObject> objects, List<LightSource> lights, int depth = 0, int maxDepth = 10)
         {
             if (depth > maxDepth) return new LightIntensity(0, 0, 0);
 
@@ -89,40 +90,13 @@ namespace RayTracing
             }
             else if (mat is ReflectiveMaterial)
             {
-                Vec reflectDir = Vec.Reflect(ray.Direction, normal).Normalize();
-                Ray reflectRay = new Ray(hitPoint + normal * 0.001f, reflectDir);
+                mat.Scatter(ray, hitPoint, normal, out Ray reflectRay, out LightIntensity attenuation);
                 return TraceRay(reflectRay, objects, lights, depth + 1, maxDepth);
             }
             else if (mat is RefractiveMaterial refractive)
             {
-                float eta = 1.0f / 1.5f; // domyślny współczynnik jeśli nie zrobiono pola
-                float cosi = (float)Math.Clamp(Vec.DotProduct(viewDir, normal), -1, 1);
-                Vec n = normal;
-
-                if (cosi < 0)
-                {
-                    cosi = -cosi;
-                }
-                else
-                {
-                    eta = 1.5f; // lub refractive.RefractionIndex, jeśli dodasz to jako pole
-                    n = -normal;
-                }
-
-                float k = 1 - eta * eta * (1 - cosi * cosi);
-                if (k < 0)
-                {
-                    // Całkowite wewnętrzne odbicie
-                    Vec reflectDir = Vec.Reflect(ray.Direction, normal).Normalize();
-                    Ray reflectRay = new Ray(hitPoint + normal * 0.001f, reflectDir);
-                    return TraceRay(reflectRay, objects, lights, depth + 1, maxDepth);
-                }
-                else
-                {
-                    Vec refractDir = (ray.Direction * eta + n * (eta * cosi - MathF.Sqrt(k))).Normalize();
-                    Ray refractRay = new Ray(hitPoint - n * 0.001f, refractDir);
-                    return TraceRay(refractRay, objects, lights, depth + 1, maxDepth);
-                }
+                mat.Scatter(ray, hitPoint, normal, out Ray refractRay, out LightIntensity attenuation);
+                return TraceRay(refractRay, objects, lights, depth + 1, maxDepth);
             }
 
             return new LightIntensity(0, 0, 0);

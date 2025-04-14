@@ -23,7 +23,7 @@ namespace Lighting
         {
             Position = position;
             Normal = normal.Normalize();
-            U = GenerateOrtho(Normal);
+            U = u.Normalize();
             V = Vec.CrossProduct(Normal, U).Normalize();
             Width = width;
             Height = height;
@@ -32,11 +32,11 @@ namespace Lighting
         }
         public override LightIntensity Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects, IRenderableObject currentObject)
         {
-            int samples = 10;
-            LightIntensity accumulated = new LightIntensity(0, 0, 0);
+            int samples = 36;
+            Vec accumulated = new Vec(0, 0, 0);
             Vec ambient = material.Color * material.Ambient;
 
-            for (int i = 0; i < samples; i++)
+            for (int i = 0; i < samples; ++i)
             {
                 Vec lightPoint = SamplePointOnSurface();
                 Vec lightDir = (lightPoint - point);
@@ -49,13 +49,10 @@ namespace Lighting
 
                 foreach (var obj in objects)
                 {
-                    if (obj.Intersect(shadowRay, out float t))
+                    if (obj.Intersect(shadowRay, out float t) && t > 0.001f && t < lightDistance)
                     {
-                        if (t > 0.01f && t < lightDistance - 0.001f)
-                        {
-                            inShadow = true;
-                            break;
-                        }
+                        inShadow = true;
+                        break;
                     }
                 }
 
@@ -70,14 +67,18 @@ namespace Lighting
                     float spec = MathF.Pow(MathF.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
                     Vec specular = effectiveColor * material.Specular * spec;
 
-                    accumulated += new LightIntensity(diffuse.x + specular.x, diffuse.y + specular.y, diffuse.z + specular.z);
+                    accumulated += diffuse + specular;
                 }
             }
 
             // Dodajemy ambient tylko raz
-            accumulated += new LightIntensity(ambient.x, ambient.y, ambient.z);
+            accumulated += ambient * samples;
 
-            return (accumulated / samples).Clamped();
+            float fract = 1.0f / samples;
+
+            Vec color = accumulated * fract;
+
+            return new LightIntensity(color.x, color.y, color.z).Clamped();
         }
 
         private Vec SamplePointOnSurface()
@@ -86,14 +87,5 @@ namespace Lighting
             float vOffset = ((float)rand.NextDouble() - 0.5f) * Height;
             return Position + U * uOffset + V * vOffset;
         }
-
-        private static Vec GenerateOrtho(Vec normal)
-        {
-            if (MathF.Abs(normal.x) > MathF.Abs(normal.z))
-                return new Vec(-normal.y, normal.x, 0).Normalize();
-            else
-                return new Vec(0, -normal.z, normal.y).Normalize();
-        }
-
     }
 }
