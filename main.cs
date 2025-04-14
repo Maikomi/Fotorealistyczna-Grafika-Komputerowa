@@ -19,14 +19,16 @@ namespace RayTracing
             var diffuseRed = new DiffuseMaterial(new Vec(1, 0, 0));
             var diffuseBlue = new DiffuseMaterial(new Vec(0, 0, 1));
             var diffuseGray = new DiffuseMaterial(new Vec(0.5f, 0.5f, 0.5f));
+            var diffuseWhite = new DiffuseMaterial(new Vec(1, 1, 1));
+            var diffuseBlack = new DiffuseMaterial(new Vec(0, 0, 0));
 
             var mirrorMaterial = new ReflectiveMaterial(new Vec(0.999f, 0.999f, 0.999f)); // prawie idealne lustro
             var glassMaterial = new RefractiveMaterial(new Vec(1.0f, 1.0f, 1.0f), 1.5f);  // współczynnik załamania 1.5
 
             // Ściany pudełka Cornell Box
-            var floor = new Plane(new Vec(0, -1, 0), new Vec(0, 1, 0), diffuseGray);
-            var ceiling = new Plane(new Vec(0, 1, 0), new Vec(0, -1, 0), diffuseGray);
-            var backWall = new Plane(new Vec(0, 0, -3), new Vec(0, 0, 1), diffuseGray);
+            var floor = new Plane(new Vec(0, -1, 0), new Vec(0, 1, 0), diffuseWhite);
+            var ceiling = new Plane(new Vec(0, 1, 0), new Vec(0, -1, 0), diffuseWhite);
+            var backWall = new Plane(new Vec(0, 0, -3), new Vec(0, 0, 1), diffuseWhite);
             var leftWall = new Plane(new Vec(-1, 0, 0), new Vec(1, 0, 0), diffuseRed);
             var rightWall = new Plane(new Vec(1, 0, 0), new Vec(-1, 0, 0), diffuseBlue);
 
@@ -36,7 +38,7 @@ namespace RayTracing
 
             // Światło
             var surfaceLight = new SurfaceLight(
-                new Vec(0, 0.99f, -2), 
+                new Vec(0, 0.95f, -1.5f), 
                 new Vec(0, -1, 0),
                 new Vec(1, 0, 0),
                 width: 2.0f,

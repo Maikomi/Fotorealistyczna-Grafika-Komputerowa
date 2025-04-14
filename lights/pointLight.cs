@@ -18,18 +18,27 @@ namespace Lighting
             Intensity = intensity;
             Color = color ?? new LightIntensity(1, 1, 1);
         }
-        public override LightIntensity Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects,  IRenderableObject currentObject)
+        public override LightIntensity Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects, IRenderableObject currentObject)
         {
             Vec lightDir = (Position - point).Normalize();
+            float lightDistance = (Position - point).VectorLength();
 
             // Shadow check
             Vec shadowRayOrigin = point + normal * 0.001f;
+            Ray shadowRay = new Ray(shadowRayOrigin, lightDir);
+
             foreach (var obj in objects)
             {
-                if (obj.Intersect(new Ray(shadowRayOrigin, lightDir), out _))
+                if (obj == currentObject) continue;
+
+                if (obj.Intersect(shadowRay, out float t))
                 {
-                    Vec result1 = material.Color * material.Ambient;
-                    return new LightIntensity(result1.x, result1.y, result1.z);
+                    if (t > 0.001f && t < lightDistance)
+                    {
+                        // W cieniu – tylko komponent ambient
+                        Vec ambientOnly = material.Color * material.Ambient;
+                        return new LightIntensity(ambientOnly.x, ambientOnly.y, ambientOnly.z);
+                    }
                 }
 
             }
