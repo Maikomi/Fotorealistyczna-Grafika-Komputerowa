@@ -37,13 +37,16 @@ namespace Vector
 
          public bool Intersect(Ray ray, out float t)
         {
+            t = 0; // Initialize t to avoid unassigned usage
+
             if (Intersections.IntersectionPlane(ray, this, out float intersection ))
             {
                 t = intersection; 
                 return t >= 0;
             }
 
-            t = 0;
+            if (t < 0.001f) return false;
+
             return false;
         }
 

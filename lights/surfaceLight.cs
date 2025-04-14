@@ -31,52 +31,52 @@ namespace Lighting
             Color = color ?? new LightIntensity(1, 1, 1);
         }
         public override LightIntensity Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects, IRenderableObject currentObject)
-    {
-        int samples = 128;
-        LightIntensity accumulated = new LightIntensity(0, 0, 0);
-        Vec ambient = material.Color * material.Ambient;
-
-        for (int i = 0; i < samples; i++)
         {
-            Vec lightPoint = SamplePointOnSurface();
-            Vec lightDir = (lightPoint - point);
-            float lightDistance = lightDir.VectorLength();
-            lightDir = lightDir.Normalize();
+            int samples = 128;
+            LightIntensity accumulated = new LightIntensity(0, 0, 0);
+            Vec ambient = material.Color * material.Ambient;
 
-            Vec shadowRayOrigin = point + normal * 0.001f;
-            Ray shadowRay = new Ray(shadowRayOrigin, lightDir);
-            bool inShadow = false;
-
-            foreach (var obj in objects)
+            for (int i = 0; i < samples; i++)
             {
-                if (obj == currentObject) continue;
-                if (obj.Intersect(shadowRay, out float t) && t > 0.001f && t < lightDistance)
+                Vec lightPoint = SamplePointOnSurface();
+                Vec lightDir = (lightPoint - point);
+                float lightDistance = lightDir.VectorLength();
+                lightDir = lightDir.Normalize();
+
+                Vec shadowRayOrigin = point + normal * 0.001f;
+                Ray shadowRay = new Ray(shadowRayOrigin, lightDir);
+                bool inShadow = false;
+
+                foreach (var obj in objects)
                 {
-                    inShadow = true;
-                    break;
+                    if (obj == currentObject) continue;
+                    if (obj.Intersect(shadowRay, out float t) && t > 0.001f && t < lightDistance)
+                    {
+                        inShadow = true;
+                        break;
+                    }
+                }
+
+                if (!inShadow)
+                {
+                    Vec effectiveColor = this.Color * this.Intensity;
+
+                    float diff = MathF.Max(Vec.DotProduct(normal, lightDir), 0);
+                    Vec diffuse = effectiveColor * material.Color * material.Diffuse * diff;
+
+                    Vec reflectDir = Vec.Reflect(-lightDir, normal);
+                    float spec = MathF.Pow(MathF.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
+                    Vec specular = effectiveColor * material.Specular * spec;
+
+                    accumulated += new LightIntensity(diffuse.x + specular.x, diffuse.y + specular.y, diffuse.z + specular.z);
                 }
             }
 
-            if (!inShadow)
-            {
-                Vec effectiveColor = this.Color * this.Intensity;
+            // Dodajemy ambient tylko raz
+            accumulated += new LightIntensity(ambient.x, ambient.y, ambient.z) * samples;
 
-                float diff = MathF.Max(Vec.DotProduct(normal, lightDir), 0);
-                Vec diffuse = effectiveColor * material.Color * material.Diffuse * diff;
-
-                Vec reflectDir = Vec.Reflect(-lightDir, normal);
-                float spec = MathF.Pow(MathF.Max(Vec.DotProduct(viewDir, reflectDir), 0), material.Shininess);
-                Vec specular = effectiveColor * material.Specular * spec;
-
-                accumulated += new LightIntensity(diffuse.x + specular.x, diffuse.y + specular.y, diffuse.z + specular.z);
-            }
+            return (accumulated / samples).Clamped();
         }
-
-        // Dodajemy ambient tylko raz
-        accumulated += new LightIntensity(ambient.x, ambient.y, ambient.z) * samples;
-
-        return (accumulated / samples).Clamped();
-    }
 
         private Vec SamplePointOnSurface()
         {

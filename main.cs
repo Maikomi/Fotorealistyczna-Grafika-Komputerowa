@@ -58,7 +58,7 @@ namespace RayTracing
 
             var lights = new List<LightSource>
             {
-                surfaceLight, pointLight
+                pointLight
             };
 
             // Tło

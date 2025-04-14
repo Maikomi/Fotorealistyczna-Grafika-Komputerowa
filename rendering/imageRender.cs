@@ -42,7 +42,9 @@ namespace RayTracing
             Console.WriteLine($"Image has been saved as {filename}");
         }
 
-        public LightIntensity PhongLighting(Vec point, Vec viewDir, IRenderableObject obj, List<LightSource> lights)
+        
+
+        public LightIntensity PhongLighting(Vec point, Vec viewDir, IRenderableObject obj, List<IRenderableObject> objects, List<LightSource> lights)
         {
             Material material = obj.GetMaterial();
             Vec normal = obj.GetNormal(point);
@@ -50,11 +52,12 @@ namespace RayTracing
 
             foreach (var light in lights)
             {
-                result += light.Illuminate(point, normal, viewDir, material, new List<IRenderableObject> { obj }, obj);
+                result += light.Illuminate(point, normal, viewDir, material, objects, obj); // <--- teraz objects to cała scena!
             }
 
             return result.Clamped();
         }
+
 
         public LightIntensity TraceRay(Ray ray, List<IRenderableObject> objects, List<LightSource> lights, int depth = 0, int maxDepth = 4)
         {
@@ -82,7 +85,7 @@ namespace RayTracing
 
             if (mat is DiffuseMaterial)
             {
-                return PhongLighting(hitPoint, viewDir, closestObject, lights);
+                return PhongLighting(hitPoint, viewDir, closestObject, objects, lights);
             }
             else if (mat is ReflectiveMaterial)
             {
