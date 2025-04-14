@@ -23,7 +23,7 @@ namespace Lighting
         {
             Position = position;
             Normal = normal.Normalize();
-            U = u.Normalize();
+            U = GenerateOrtho(Normal);
             V = Vec.CrossProduct(Normal, U).Normalize();
             Width = width;
             Height = height;
@@ -32,7 +32,7 @@ namespace Lighting
         }
         public override LightIntensity Illuminate(Vec point, Vec normal, Vec viewDir, Material material, List<IRenderableObject> objects, IRenderableObject currentObject)
         {
-            int samples = 128;
+            int samples = 10;
             LightIntensity accumulated = new LightIntensity(0, 0, 0);
             Vec ambient = material.Color * material.Ambient;
 
@@ -43,17 +43,19 @@ namespace Lighting
                 float lightDistance = lightDir.VectorLength();
                 lightDir = lightDir.Normalize();
 
-                Vec shadowRayOrigin = point + normal * 0.001f;
+                Vec shadowRayOrigin = point + lightDir * 0.001f;
                 Ray shadowRay = new Ray(shadowRayOrigin, lightDir);
                 bool inShadow = false;
 
                 foreach (var obj in objects)
                 {
-                    if (obj == currentObject) continue;
-                    if (obj.Intersect(shadowRay, out float t) && t > 0.001f && t < lightDistance)
+                    if (obj.Intersect(shadowRay, out float t))
                     {
-                        inShadow = true;
-                        break;
+                        if (t > 0.01f && t < lightDistance - 0.001f)
+                        {
+                            inShadow = true;
+                            break;
+                        }
                     }
                 }
 
@@ -73,7 +75,7 @@ namespace Lighting
             }
 
             // Dodajemy ambient tylko raz
-            accumulated += new LightIntensity(ambient.x, ambient.y, ambient.z) * samples;
+            accumulated += new LightIntensity(ambient.x, ambient.y, ambient.z);
 
             return (accumulated / samples).Clamped();
         }
@@ -84,5 +86,14 @@ namespace Lighting
             float vOffset = ((float)rand.NextDouble() - 0.5f) * Height;
             return Position + U * uOffset + V * vOffset;
         }
+
+        private static Vec GenerateOrtho(Vec normal)
+        {
+            if (MathF.Abs(normal.x) > MathF.Abs(normal.z))
+                return new Vec(-normal.y, normal.x, 0).Normalize();
+            else
+                return new Vec(0, -normal.z, normal.y).Normalize();
+        }
+
     }
 }
